@@ -6,7 +6,7 @@
 #    By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/15 16:29:02 by srouhe            #+#    #+#              #
-#    Updated: 2020/01/06 19:32:54 by srouhe           ###   ########.fr        #
+#    Updated: 2020/01/06 23:20:44 by srouhe           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ all: $(NAME)
 
 $(NAME):
 	@make -C libft
-	@$(C) $(FLAGS) -o $(NAME) $(SRCS) -I includes/ -I libft/includes -Llibft -lft
+	@$(C) $(FLAGS) -o $(NAME) $(SRCS) -I includes/ -I libft/includes -Llibft -lft -ltermcap
 
 clean:
 	@make clean -C libft
