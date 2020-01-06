@@ -1,0 +1,6 @@
+.DS_Store
+*.a
+*.o
+a.out
+.vscode
+ft_select
