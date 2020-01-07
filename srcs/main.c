@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 19:10:26 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/07 09:44:29 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/07 10:30:31 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		errors(char *arg, int code)
 	code == 2 ? ft_printf("ft_select: failed to open %s\n", arg) : PASS;
 }
 
-void			column_count(int width)
+int			column_count(int max_width)
 {
 	int				limit;
 	int				cols;
@@ -30,29 +30,52 @@ void			column_count(int width)
 
 	limit = 8;
 	ioctl(1, TIOCGSIZE, &w);
-	while (width >= limit)
+	while (max_width >= limit)
 		limit += 8;
 	cols = w.ws_col / limit;
+	return (cols);
 }
 
-void			read_dir(char *dirname)
+void			print_options(char **av)
 {
-	int						x;
-	struct dirent			*dp;
-	DIR						*dir;
+	int		i;
+	int		j;
+	int		x;
+	int		cols;
+	int		rows;
+	int		max_w;
 
-	x = 8;
-	!(dir = opendir(dirname)) ? errors(dirname, 2) : PASS;
-	if (dir)
+	max_w = 0;
+	rows = 0;
+	i = 0;
+	j = 0;
+	x = 0;
+	while (av[++i])
+		max_w = ft_strlen(av[i]) > max_w ? ft_strlen(av[i]) : max_w;
+	cols = column_count(max_w);
+	// ft_printf("columns %d max_w %d\n", cols, max_w);
+	i = 0;
+	while (av[++i])
 	{
-		while ((dp = readdir(dir)))
+		ft_putstr_fd(tgoto(CM, x, rows), 0);
+		ft_putendl(av[i]);
+		x += max_w + 8;
+		j++;
+		if (j == cols - 1)
 		{
-			ft_putstr_fd(tgoto(CM, x, 0), 0);
-			ft_putendl((*dp).d_name);
-			x += ft_strlen((*dp).d_name) + 8;
+			rows++;
+			x = 0;
+			j = 0;
+			ft_putstr_fd(tgoto(CM, 0, rows), 0);
 		}
 	}
-	dir ? closedir(dir) : PASS;
+}
+
+void	reset_terminal(struct termios def)
+{
+	tcsetattr(STDERR_FILENO, TCSANOW, &def);
+	tputs(VE, 1, ft_printnbr);
+	tputs(TE, 1, ft_printnbr);
 }
 
 int		main(int ac, char **av)
@@ -60,6 +83,7 @@ int		main(int ac, char **av)
 	int				r;
 	char			buf[BUF_SIZE + 1];
 	struct termios	attr;
+	struct termios	def;
 
 	r = tgetent(buf, getenv("TERM"));
 	tcgetattr(STDERR_FILENO, &attr);
@@ -73,6 +97,7 @@ int		main(int ac, char **av)
 	tputs(CL, 1, ft_printnbr);
 	tputs(TI, 1, ft_printnbr);
 	tputs(VI, 1, ft_printnbr);
-	read_dir(av[1]);
+	print_options(av);
+	// reset_terminal(def);
 	return (0);
 }

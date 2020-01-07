@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 18:15:52 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/07 09:47:32 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/07 10:14:49 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include <signal.h>
 # include <sys/ioctl.h>
 # include <termios.h>
-# include <dirent.h>
 # include <sys/stat.h>
 
 /*
@@ -51,10 +50,22 @@
 # define RIGHT 0x435B1B
 # define LEFT 0x445B1B
 
+/*
+** Definitions of termcaps tuples:
+**  CM: cursor motion
+**  CL: clear screen
+**  VI: invisible cursor
+**  VE: visible cursor
+**  TI: full screen
+**  TE: return to normal mode
+*/
+
 # define CM (tgetstr("cm", NULL))
 # define CL (tgetstr("cl", NULL))
 # define VI (tgetstr("vi", NULL))
+# define VE (tgetstr("ve", NULL))
 # define TI (tgetstr("ti", NULL))
+# define TE (tgetstr("te", NULL))
 
 typedef struct		s_sel
 {
