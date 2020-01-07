@@ -5,6 +5,13 @@ tputs(3)
 tcgetattr(3)
 tcsetattr(3)
 
+### Dependencies
+Termcaps lib
+```sh
+sudo apt-get install libncurses5-dev
+```
+
+
 ### Reading
 [Termcaps library](https://www.gnu.org/software/termutils/manual/termcap-1.3/html_mono/termcap.html)
 
