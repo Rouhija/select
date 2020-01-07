@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 18:15:52 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/07 22:42:14 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/07 23:35:38 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 # define BUF_SIZE 4096
 # define COLUMN_W 8
 
+# define INVERSE_VIDEO "\033[7m"
 # define UNDERLINE "\033[4m"
 
 # define ESC 0x1B
@@ -85,7 +86,6 @@ typedef struct		s_sel
 	struct termios	def;
 	t_arg			*args;
 	t_arg			*active;
-	char			**av;
 	int				ac;
 	int				max_w;
 	int				mode;
@@ -111,6 +111,8 @@ void	exit_program(char *arg, int code, int flag);
 void	signal_handler(int signo);
 void	wait_for_input(void);
 void	set_args(char **av);
+void	free_args(void);
+void	delete_arg(void);
 void	print_args(void);
 void	cursor_move(int x, int y);
 
