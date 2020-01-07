@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:11:21 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/06 19:10:35 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/07 12:43:51 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	signal_handler(int signo)
 {
 	if (signo == SIGINT)
 	{
-		ft_putchar('\n');
-		signal(SIGINT, signal_handler);
+		reset_config();
+		exit_program(NULL, 0, 1);
 	}
 }

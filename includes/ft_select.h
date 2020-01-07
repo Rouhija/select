@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 18:15:52 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/07 10:14:49 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/07 12:57:24 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,35 @@
 # define TI (tgetstr("ti", NULL))
 # define TE (tgetstr("te", NULL))
 
+typedef struct		s_arg
+{
+	struct s_arg	*next;
+	struct s_arg	*prev;
+}					t_arg;
+
 typedef struct		s_sel
 {
 	struct termios	attr;
+	struct termios	def;
+	t_arg			*args;
+	char			**av;
+	int				max_w;
+	int				mode;
 }					t_sel;
+
+t_sel				g_sel;
 
 /*
 ** -------- FUNCTIONS --------
 */
+
+int		printnbr(int nbr);
+
+void	initial_config(void);
+void	reset_config(void);
+void	exit_program(char *arg, int code, int flag);
+void	signal_handler(int signo);
+void	wait_for_input(void);
+void	print_args(void);
 
 #endif

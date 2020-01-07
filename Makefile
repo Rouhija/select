@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+         #
+#    By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/15 16:29:02 by srouhe            #+#    #+#              #
-#    Updated: 2020/01/06 23:20:44 by srouhe           ###   ########.fr        #
+#    Updated: 2020/01/07 12:57:46 by srouhe           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,11 @@ NAME 	= 	ft_select
 C		= 	gcc
 FLAGS 	= 	
 
-FILES 	=	main.c
+FILES 	=	config.c \
+			input.c \
+			main.c \
+			signal.c \
+			utils.c
 
 SRCS 	=	$(addprefix srcs/, $(FILES))
 OBJS 	=	$(FILES:.c=.o)
