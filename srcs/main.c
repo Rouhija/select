@@ -6,13 +6,13 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 19:10:26 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/07 23:36:44 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/07 23:53:51 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-void		exit_program(char *arg, int code, int flag)
+void			exit_program(char *arg, int code, int flag)
 {
 	if (flag)
 	{
@@ -26,20 +26,20 @@ void		exit_program(char *arg, int code, int flag)
 	exit(code);
 }
 
-void	monitor_signals(void)
+static void		monitor_signals(void)
 {
 	signal(SIGSTOP, signal_handler);
 	signal(SIGINT, signal_handler);
 	signal(SIGKILL, signal_handler);
 }
 
-int		main(int ac, char **av)
+int				main(int ac, char **av)
 {
 	if (ac < 2)
 		exit_program(NULL, 1, 0);
 	monitor_signals();
 	set_args(av);
-	// ft_printf("cols %d rows %d max_w %d ac %d pad %d\n", g_sel.cols, g_sel.rows, g_sel.max_w, g_sel.ac, g_sel.pad);
+	ft_printf("cols %d rows %d max_w %d ac %d pad %d\n", g_sel.cols, g_sel.rows, g_sel.max_w, g_sel.ac, g_sel.pad);
 	initial_config();
 	wait_for_input();
 	reset_config();

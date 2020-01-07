@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 12:56:18 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/07 23:31:52 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/08 00:01:08 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@ void			action_arrow(long key)
 {
 	int	steps;
 
-	steps = g_sel.cols;
-	if (key == RIGHT)
+	steps = g_sel.rows;
+	if (key == DOWN)
 		g_sel.active = g_sel.active->next;
-	else if (key == LEFT)
+	else if (key == UP)
 		g_sel.active = g_sel.active->prev;
-	else if (key == DOWN)
+	else if (key == RIGHT)
 	{
 		while (steps--)
 			g_sel.active = g_sel.active->next;
 	}
-	else if (key == UP)
+	else if (key == LEFT)
 	{
 		while (steps--)
 			g_sel.active = g_sel.active->prev;
@@ -36,7 +36,7 @@ void			action_arrow(long key)
 void			action_spc(void)
 {
 	g_sel.active->toggle = g_sel.active->toggle ? 0 : 1;
-	g_sel.active = g_sel.active->next;
+	action_arrow(RIGHT);
 }
 
 void			wait_for_input(void)

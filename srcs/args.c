@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 18:23:56 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/07 23:32:58 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/07 23:54:13 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_arg		*new_arg(char *name)
 	return (new);
 }
 
-void	free_args(void)
+void	free_args(void) /* not working */
 {
 	t_arg	*tmp;
 

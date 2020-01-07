@@ -11,8 +11,8 @@ Termcaps lib
 sudo apt-get install libncurses5-dev
 ```
 
-
 ### Reading
+[suspend ctrl-z](https://superuser.com/questions/262942/whats-different-between-ctrlz-and-ctrlc-in-unix-command-line)
 [Termcaps library](https://www.gnu.org/software/termutils/manual/termcap-1.3/html_mono/termcap.html)
 
 ```
