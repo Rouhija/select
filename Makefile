@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+         #
+#    By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/15 16:29:02 by srouhe            #+#    #+#              #
-#    Updated: 2020/01/07 12:57:46 by srouhe           ###   ########.fr        #
+#    Updated: 2020/01/07 20:04:25 by srouhe           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ NAME 	= 	ft_select
 C		= 	gcc
 FLAGS 	= 	
 
-FILES 	=	config.c \
+FILES 	=	arguments.c \
+			config.c \
 			input.c \
 			main.c \
 			signal.c \

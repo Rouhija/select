@@ -3,14 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 12:56:18 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/07 12:56:57 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/07 23:04:12 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
+
+void			action_arrow(long key)
+{
+	int	steps;
+
+	steps = g_sel.cols;
+	if (key == RIGHT)
+		g_sel.active = g_sel.active->next;
+	else if (key == LEFT)
+		g_sel.active = g_sel.active->prev;
+	else if (key == DOWN)
+	{
+		while (steps--)
+			g_sel.active = g_sel.active->next;
+	}
+	else if (key == UP)
+	{
+		while (steps--)
+			g_sel.active = g_sel.active->prev;
+	}
+}
 
 void			wait_for_input(void)
 {
@@ -31,13 +52,7 @@ void			wait_for_input(void)
 			ft_putendl("BACKSPACE");
 		else if (key == DEL)
 			ft_putendl("DELETE");
-		else if (key == UP)
-			ft_putendl("UP");
-		else if (key == DOWN)
-			ft_putendl("DOWN");
-		else if (key == RIGHT)
-			ft_putendl("RIGHT");
-		else if (key == LEFT)
-			ft_putendl("LEFT");
+		else if (key == UP || key == DOWN || key == RIGHT || key == LEFT)
+			action_arrow(key);
 	}
 }

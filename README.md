@@ -16,6 +16,12 @@ sudo apt-get install libncurses5-dev
 [Termcaps library](https://www.gnu.org/software/termutils/manual/termcap-1.3/html_mono/termcap.html)
 
 ```
+tcflag_t c_iflag;      /* input modes */
+tcflag_t c_oflag;      /* output modes */
+tcflag_t c_cflag;      /* control modes */
+tcflag_t c_lflag;      /* local modes */
+cc_t     c_cc[NCCS];   /* special characters */
+
 termios_p->c_iflag &= ~(IGNBRK | BRKINT | PARMRK | ISTRIP
 				| INLCR | IGNCR | ICRNL | IXON);
 termios_p->c_oflag &= ~OPOST;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   config.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 12:01:39 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/07 12:40:07 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/07 18:02:02 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,8 @@ void	initial_config(void)
 		exit_program(NULL, 2, 0);
 	tcgetattr(2, &g_sel.attr);
 	tcgetattr(2, &g_sel.def);
-	// g_sel.attr.c_iflag &= ~(IGNBRK | BRKINT | PARMRK | ISTRIP
-					// | INLCR | IGNCR | ICRNL | IXON);
 	g_sel.attr.c_oflag &= ~OPOST;
-	g_sel.attr.c_lflag &= ~(ECHO | ECHONL | ICANON | ISIG | IEXTEN);
-	// g_sel.attr.c_cflag &= ~(CSIZE | PARENB);
-	// g_sel.attr.c_cflag |= CS8;
+	g_sel.attr.c_lflag &= ~(ECHO | ECHONL | ICANON);
 	tcsetattr(2, TCSANOW, &g_sel.attr);
 	tputs(CL, 1, printnbr);
 	tputs(TI, 1, printnbr);
