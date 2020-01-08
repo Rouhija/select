@@ -12,9 +12,10 @@ sudo apt-get install libncurses5-dev
 ```
 cols 8 rows 11 max_w 30 ac 82 pad 32 active column 0 lacking 14
 ### Reading
-[suspend ctrl-z](https://superuser.com/questions/262942/whats-different-between-ctrlz-and-ctrlc-in-unix-command-line)
-[Termcaps library](https://www.gnu.org/software/termutils/manual/termcap-1.3/html_mono/termcap.html)
-[colors](https://www.quora.com/How-do-I-print-a-colored-output-in-C)
+- [suspend ctrl-z](https://superuser.com/questions/262942/whats-different-between-ctrlz-and-ctrlc-in-unix-command-line)
+- [Termcaps library](https://www.gnu.org/software/termutils/manual/termcap-1.3/html_mono/termcap.html)
+- [colors](https://www.quora.com/How-do-I-print-a-colored-output-in-C)
+- [raw mode](https://viewsourcecode.org/snaptoken/kilo/02.enteringRawMode.html)
 
 ```
 tcflag_t c_iflag;      /* input modes */
