@@ -19,6 +19,7 @@ valgrind --track-origins=yes --leak-check=full --show-leak-kinds=all
 - [Termcaps library](https://www.gnu.org/software/termutils/manual/termcap-1.3/html_mono/termcap.html)
 - [colors](https://www.quora.com/How-do-I-print-a-colored-output-in-C)
 - [raw mode](https://viewsourcecode.org/snaptoken/kilo/02.enteringRawMode.html)
+https://indradhanush.github.io/blog/writing-a-unix-shell-part-3/
 
 ```
 tcflag_t c_iflag;      /* input modes */

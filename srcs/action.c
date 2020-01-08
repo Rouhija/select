@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 18:33:45 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/08 20:25:00 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/08 21:32:53 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,19 @@ void		action_spc(void)
 {
 	g_sel.active->toggle = g_sel.active->toggle ? 0 : 1;
 	action_arrow(RIGHT);
+}
+
+void		action_all(long key)
+{
+	int	i;
+	int	toggle;
+
+	i = 0;
+	toggle = key == A_UP ? 1 : 0;
+	while (i < g_sel.ac)
+	{
+		g_sel.active->toggle = toggle;
+		g_sel.active = g_sel.active->next;
+		i++;
+	}
 }

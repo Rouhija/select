@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 23:17:05 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/08 19:32:41 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/08 20:54:23 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ void		print_selection(void)
 	{
 		if (g_sel.args->toggle)
 		{
-			flag ? ft_putchar_fd(' ', 2) : PASS;
-			ft_putstr_fd(g_sel.args->path, 2);
+			flag ? ft_putchar_fd(' ', 1) : PASS;
+			ft_putstr_fd(g_sel.args->path, 1);
 			flag = 1;
 		}
 		g_sel.args = g_sel.args->next;
 		i++;
 	}
-	flag ? ft_putchar_fd('\n', 2) : PASS;
+	flag ? ft_putchar_fd('\n', 1) : PASS;
 }
 
 void		print_header(void)

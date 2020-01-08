@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 18:15:52 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/08 20:12:04 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/08 21:33:07 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@
 # define ENT 0xA
 # define BKS 0x7F
 # define DEL 0x7E335B1B
+# define A_UP 0x41
+# define A_LO 0x5A
 # define UP 0x415B1B
 # define DOWN 0x425B1B
 # define RIGHT 0x435B1B
@@ -130,6 +132,7 @@ void	cursor_move(int x, int y);
 void	action_bks(void);
 void	action_spc(void);
 void	action_arrow(long key);
+void	action_all(long key);
 
 void	termcap_cmd(char *cmd);
 

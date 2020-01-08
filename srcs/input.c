@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 12:56:18 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/08 20:12:12 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/08 21:31:16 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void			wait_for_input(void)
 			exit_program(NULL, 0, 1);
 		else if (key == ENT)
 			break ;
+		else if (key == A_UP || key == A_LO)
+			action_all(key);
 		else if (key == SPC)
 			action_spc();
 		else if (key == BKS || key == DEL)
