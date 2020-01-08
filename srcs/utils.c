@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 12:02:09 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/07 23:58:11 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/08 10:32:49 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	column_count(void)
 		limit += COLUMN_W;
 	g_sel.pad = limit;
 	g_sel.cols = w.ws_col / limit;
-	g_sel.rows = g_sel.ac > g_sel.cols ? g_sel.ac / g_sel.cols + 1 : 0;
+	g_sel.rows = g_sel.ac > g_sel.cols ? g_sel.ac / g_sel.cols : 0;
 }
 
 void	cursor_move(int x, int y)
@@ -37,4 +37,6 @@ void	cursor_move(int x, int y)
 	ft_putstr_fd(tgoto(CM, x, y), 0);
 	g_sel.x = x;
 	g_sel.y = y;
+	g_sel.args->coord.x = x / g_sel.pad + 1;
+	g_sel.args->coord.y = y + 1;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 16:29:36 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/07 18:07:24 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/08 10:31:53 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,12 @@ typedef struct		s_list
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
+
+typedef struct		s_point
+{
+	int				x;
+	int				y;
+}					t_point;
 
 /*
 ** -------- STRING FUNCTIONS --------

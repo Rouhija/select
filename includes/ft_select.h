@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_select.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 18:15:52 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/07 23:35:38 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/08 10:59:49 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,11 @@
 typedef struct		s_arg
 {
 	int				toggle;
+	int				column;
+	int				row;
 	char			*name;
 	char			*format;
+	struct s_point	coord;
 	struct s_arg	*next;
 	struct s_arg	*prev;
 }					t_arg;
@@ -114,6 +117,7 @@ void	set_args(char **av);
 void	free_args(void);
 void	delete_arg(void);
 void	print_args(void);
+void	print_selection(void);
 void	cursor_move(int x, int y);
 
 #endif
