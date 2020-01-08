@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 18:23:56 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/08 10:29:45 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/08 13:43:29 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ t_arg		*new_arg(char *name)
 		exit_program(NULL, 3, 0);
 	new->toggle = 0;
 	new->name = ft_rfind(name, '/') ? ft_strdup(ft_rfind(name, '/') + 1) : ft_strdup(name);
-	new->format = NULL;
+	new->path = ft_strdup(name);
+	new->color = get_color(name);
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);
@@ -33,6 +34,8 @@ void	free_args(void) /* not working */
 	while (g_sel.args != NULL)
 	{
 		free(g_sel.args->name);
+		free(g_sel.args->path);
+		free(g_sel.args->color);
 		tmp = g_sel.args->next;
 		free(g_sel.args);
 		g_sel.args = tmp;
@@ -45,7 +48,6 @@ static void	insert_arg(char *name)
 	t_arg	*tmp;
 
 	new = new_arg(name);
-	new->column = 0;
 	g_sel.ac++;
 	if (!g_sel.args)
 	{
@@ -88,6 +90,7 @@ void		set_args(char **av)
 	g_sel.y = 0;
 	g_sel.ac = 0;
 	g_sel.max_w = 0;
+	g_sel.dir = !ft_rfind(av[i], '/') ? ft_strdup("./") : ft_strsub(av[1], 0, 5);
 	while (av[++i])
 	{
 		g_sel.max_w = ft_strlen(av[i]) > g_sel.max_w ? ft_strlen(av[i]) : g_sel.max_w;

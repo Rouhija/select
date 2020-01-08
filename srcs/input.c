@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 12:56:18 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/08 10:57:58 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/08 13:36:20 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,7 @@ void			action_arrow(long key)
 {
 	int	steps;
 
-	steps = g_sel.rows + 1;
-	if (g_sel.active->column == g_sel.cols && key == RIGHT)
-		steps -= (g_sel.cols * (g_sel.rows + 1)) % g_sel.ac;
-	else if (g_sel.active->coord.x == 1 && key == LEFT)
-		steps -= (g_sel.cols * (g_sel.rows + 1)) % g_sel.ac;
+	steps = g_sel.rows ? step_count(key) : g_sel.rows + 1;
 	if (key == DOWN)
 		g_sel.active = g_sel.active->next;
 	else if (key == UP)
@@ -40,7 +36,7 @@ void			action_arrow(long key)
 void			action_spc(void)
 {
 	g_sel.active->toggle = g_sel.active->toggle ? 0 : 1;
-	action_arrow(RIGHT);
+	action_arrow(DOWN);
 }
 
 void			wait_for_input(void)

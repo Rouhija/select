@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 23:17:05 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/08 10:59:46 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/08 13:54:10 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,37 @@
 void		print_selection(void)
 {
 	int	i;
-	int	spc;
+	int	flag;
 
 	i = 0;
-	spc = 0;
+	flag = 0;
 	while (i < g_sel.ac)
 	{
 		if (g_sel.args->toggle)
 		{
-			spc ? ft_putchar_fd(' ', 2) : PASS;
-			ft_putstr_fd(g_sel.args->name, 2);
-			spc = 1;
+			flag ? ft_putchar_fd(' ', 2) : PASS;
+			ft_putstr_fd(g_sel.args->path, 2);
+			flag = 1;
 		}
 		g_sel.args = g_sel.args->next;
 		i++;
 	}
-	ft_putchar_fd('\n', 2);
+	flag ? ft_putchar_fd('\n', 2) : PASS;
+}
+
+void		print_header(void)
+{
+	ft_putstr_fd(WHITE, 2);
+	ft_putstr_fd(tgoto(CM, 0, 0), 0);
+	ft_putstr_fd("FT_SELECT BY ", 2);
+	ft_putstr_fd(ft_strupper(getenv("USER")), 2);
+	ft_putstr_fd(tgoto(CM, 0, 1), 0);
+	// tputs(CE, 1, printnbr);
+	ft_putstr_fd("                                                     ", 2);
+	ft_putstr_fd(tgoto(CM, 0, 1), 0);
+	ft_putstr_fd("relative path: ", 2);
+	ft_putstr_fd(g_sel.active->path, 2);
+	ft_putstr_fd(NORMAL, 2);
 }
 
 void		print_args(void)
@@ -40,6 +55,7 @@ void		print_args(void)
 
 	i = 0;
 	j = -1;
+	print_header();
 	while (i < g_sel.ac)
 	{
 		cursor_move(g_sel.x, g_sel.y);
@@ -48,10 +64,11 @@ void		print_args(void)
 			ft_putstr_fd(UNDERLINE, 2);
 		if (g_sel.args->toggle)
 			ft_putstr_fd(INVERSE_VIDEO, 2);
-		// ft_putstr_fd(g_sel.args->name, 2);
-		ft_putstr_fd(ft_itoa_base(g_sel.args->coord.x, 10), 2);
-		ft_putchar_fd(' ', 2);
-		ft_putstr_fd(ft_itoa_base(g_sel.args->coord.y, 10), 2);
+		ft_putstr_fd(g_sel.args->color, 2);
+		ft_putstr_fd(g_sel.args->name, 2);
+		// ft_putstr_fd(ft_itoa_base(g_sel.args->coord.x, 10), 2);
+		// ft_putchar_fd(' ', 2);
+		// ft_putstr_fd(ft_itoa_base(g_sel.args->coord.y, 10), 2);
 		ft_putstr_fd(NORMAL, 2);
 		j++;
 		if (j == g_sel.rows)

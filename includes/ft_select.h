@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 18:15:52 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/08 10:59:49 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/08 13:53:04 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,14 @@
 
 # define BUF_SIZE 4096
 # define COLUMN_W 8
+# define HEADER 3
 
 # define INVERSE_VIDEO "\033[7m"
 # define UNDERLINE "\033[4m"
+# define C_MAKEFILE "\033[00;31m"
+# define C_OBJ "\033[01;30m"
+# define C_A "\033[22;34m"
+# define C_NO "\033[22;37m"
 
 # define ESC 0x1B
 # define SPC 0x20
@@ -58,6 +63,7 @@
 ** Definitions of termcaps tuples:
 **  CM: cursor motion
 **  CL: clear screen
+**  CE: clear line
 **  VI: invisible cursor
 **  VE: visible cursor
 **  TI: full screen
@@ -66,6 +72,7 @@
 
 # define CM (tgetstr("cm", NULL))
 # define CL (tgetstr("cl", NULL))
+# define CE (tgetstr("cl", NULL))
 # define VI (tgetstr("vi", NULL))
 # define VE (tgetstr("ve", NULL))
 # define TI (tgetstr("ti", NULL))
@@ -77,7 +84,8 @@ typedef struct		s_arg
 	int				column;
 	int				row;
 	char			*name;
-	char			*format;
+	char			*path;
+	char			*color;
 	struct s_point	coord;
 	struct s_arg	*next;
 	struct s_arg	*prev;
@@ -89,9 +97,10 @@ typedef struct		s_sel
 	struct termios	def;
 	t_arg			*args;
 	t_arg			*active;
+	char			*dir;
 	int				ac;
 	int				max_w;
-	int				mode;
+	int				lacking;
 	int				cols;
 	int				rows;
 	int				pad;
@@ -106,6 +115,9 @@ t_sel				g_sel;
 */
 
 int		printnbr(int nbr);
+int		step_count(long key);
+
+char	*get_color(char *name);
 
 void	column_count(void);
 void	initial_config(void);
