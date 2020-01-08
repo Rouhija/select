@@ -6,11 +6,20 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 18:33:45 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/08 18:43:15 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/08 20:25:00 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
+
+void		cursor_move(int x, int y)
+{
+	ft_putstr_fd(tgoto(CM, x, y + HEADER), 0);
+	g_sel.x = x;
+	g_sel.y = y;
+	g_sel.args->coord.x = x / g_sel.pad + 1;
+	g_sel.args->coord.y = y + 1;
+}
 
 void		action_bks(void)
 {
@@ -20,16 +29,17 @@ void		action_bks(void)
 
 	prev = g_sel.active->prev;
 	next = g_sel.active->next;
-	g_sel.ac--;
 	tmp = g_sel.active;
+	if (tmp == g_sel.head)
+		g_sel.head = next;
 	free_arg(&tmp);
 	g_sel.active = next;
 	prev->next = next;
 	next->prev = prev;
-	tputs(CL, 1, printnbr);
+	g_sel.ac--;
 }
 
-void			action_arrow(long key)
+void		action_arrow(long key)
 {
 	int	steps;
 
@@ -50,7 +60,7 @@ void			action_arrow(long key)
 	}
 }
 
-void			action_spc(void)
+void		action_spc(void)
 {
 	g_sel.active->toggle = g_sel.active->toggle ? 0 : 1;
 	action_arrow(RIGHT);

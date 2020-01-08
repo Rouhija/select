@@ -3,14 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   args.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 18:23:56 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/08 13:43:29 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/08 20:23:07 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
+
+void		free_arg(t_arg **arg)
+{
+	if (arg && *arg)
+	{
+		free((*arg)->name);
+		free((*arg)->path);
+		free((*arg)->color);
+		free(*arg);
+		(*arg) = NULL;
+	}
+}
+
+void		free_memory(void)
+{
+	t_arg	*tmp;
+
+	if (g_sel.active && g_sel.ac)
+	{
+		while (g_sel.active && g_sel.ac--)
+		{
+			tmp = g_sel.active->next;
+			free_arg(&g_sel.active);
+			g_sel.active = tmp;
+		}
+	}
+}
 
 t_arg		*new_arg(char *name)
 {
@@ -27,21 +54,6 @@ t_arg		*new_arg(char *name)
 	return (new);
 }
 
-void	free_args(void) /* not working */
-{
-	t_arg	*tmp;
-
-	while (g_sel.args != NULL)
-	{
-		free(g_sel.args->name);
-		free(g_sel.args->path);
-		free(g_sel.args->color);
-		tmp = g_sel.args->next;
-		free(g_sel.args);
-		g_sel.args = tmp;
-	}
-}
-
 static void	insert_arg(char *name)
 {
 	t_arg	*new;
@@ -54,6 +66,7 @@ static void	insert_arg(char *name)
 		new->prev = new;
 		new->next = new;
 		g_sel.args = new;
+		g_sel.head = new;
 		g_sel.active = new;
 	}
 	else
@@ -66,21 +79,6 @@ static void	insert_arg(char *name)
 	}
 }
 
-void		delete_arg(void)
-{
-	t_arg	*prev;
-	t_arg	*next;
-
-	prev = g_sel.active->prev;
-	next = g_sel.active->next;
-	free(g_sel.active);
-	g_sel.ac--;
-	g_sel.active = next;
-	// free_args();
-	prev->next = next;
-	next->prev = prev;
-}
-
 void		set_args(char **av)
 {
 	int		i;
@@ -90,11 +88,9 @@ void		set_args(char **av)
 	g_sel.y = 0;
 	g_sel.ac = 0;
 	g_sel.max_w = 0;
-	g_sel.dir = !ft_rfind(av[i], '/') ? ft_strdup("./") : ft_strsub(av[1], 0, 5);
 	while (av[++i])
 	{
 		g_sel.max_w = ft_strlen(av[i]) > g_sel.max_w ? ft_strlen(av[i]) : g_sel.max_w;
 		insert_arg(av[i]);
 	}
-	column_count();
 }

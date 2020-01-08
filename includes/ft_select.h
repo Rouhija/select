@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_select.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 18:15:52 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/08 13:53:04 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/08 20:12:04 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,6 @@
 # include <sys/stat.h>
 
 /*
-** -------- MACROS --------
-*/
-
-/*
 ** -------- TYPEDEFS --------
 */
 
@@ -41,11 +37,12 @@
 # define BUF_SIZE 4096
 # define COLUMN_W 8
 # define HEADER 3
+# define JUMP 1
 
 # define INVERSE_VIDEO "\033[7m"
 # define UNDERLINE "\033[4m"
-# define C_MAKEFILE "\033[00;31m"
-# define C_OBJ "\033[01;30m"
+# define C_MAKEFILE "\033[22;31m"
+# define C_OBJ "\033[22;37m"
 # define C_A "\033[22;34m"
 # define C_NO "\033[22;37m"
 
@@ -81,8 +78,6 @@
 typedef struct		s_arg
 {
 	int				toggle;
-	int				column;
-	int				row;
 	char			*name;
 	char			*path;
 	char			*color;
@@ -96,16 +91,16 @@ typedef struct		s_sel
 	struct termios	attr;
 	struct termios	def;
 	t_arg			*args;
+	t_arg			*head;
 	t_arg			*active;
-	char			*dir;
 	int				ac;
 	int				max_w;
 	int				lacking;
-	int				cols;
-	int				rows;
 	int				pad;
 	int				x;
 	int				y;
+	int				cols;
+	int				rows;
 }					t_sel;
 
 t_sel				g_sel;
@@ -126,10 +121,16 @@ void	exit_program(char *arg, int code, int flag);
 void	signal_handler(int signo);
 void	wait_for_input(void);
 void	set_args(char **av);
-void	free_args(void);
-void	delete_arg(void);
+void	free_arg(t_arg **arg);
+void	free_memory(void);
 void	print_args(void);
 void	print_selection(void);
+
 void	cursor_move(int x, int y);
+void	action_bks(void);
+void	action_spc(void);
+void	action_arrow(long key);
+
+void	termcap_cmd(char *cmd);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 23:17:05 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/08 13:54:10 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/08 19:32:41 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,9 @@ void		print_args(void)
 
 	i = 0;
 	j = -1;
+	column_count();
 	print_header();
+	g_sel.args = g_sel.head;
 	while (i < g_sel.ac)
 	{
 		cursor_move(g_sel.x, g_sel.y);

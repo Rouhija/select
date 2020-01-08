@@ -3,18 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 12:02:09 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/08 13:52:08 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/08 20:11:44 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-int		printnbr(int nbr)
+void	termcap_cmd(char *cmd)
 {
-	return (write(2, &nbr, 1));
+	char *cmd_s;
+
+	tputs(CL, 1, printnbr);
+	cmd_s = (tgetstr(cmd, NULL));
+	tputs(cmd_s, 1, printnbr);
+	free(cmd_s);
 }
 
 int		step_count(long key)
@@ -23,13 +28,14 @@ int		step_count(long key)
 
 	steps = g_sel.rows + 1;
 	if (g_sel.active->coord.x == g_sel.cols && key == RIGHT)
-		steps -= g_sel.lacking;
-	else if (g_sel.active->coord.x == 1 && key == LEFT && g_sel.active->coord.y + g_sel.lacking > g_sel.rows + 1)
-		steps += g_sel.rows + 1 - g_sel.lacking;
+		steps -= g_sel.lacking - JUMP;
 	else if (g_sel.active->coord.x == g_sel.cols - 1 && key == RIGHT && g_sel.active->coord.y + g_sel.lacking > g_sel.rows + 1)
-		steps += g_sel.rows + 1 - g_sel.lacking;
+		steps += g_sel.rows + 1 - g_sel.lacking + JUMP;
+
+	else if (g_sel.active->coord.x == 1 && key == LEFT && g_sel.active->coord.y + g_sel.lacking > g_sel.rows + 1)
+		steps += g_sel.rows + 1 - g_sel.lacking + JUMP;
 	else if (g_sel.active->coord.x == 1 && key == LEFT)
-		steps -= g_sel.lacking;
+		steps -= g_sel.lacking - JUMP;
 	return (steps);
 }
 
@@ -61,11 +67,3 @@ void	column_count(void)
 	g_sel.lacking = (g_sel.cols * (g_sel.rows + 1)) % g_sel.ac;
 }
 
-void	cursor_move(int x, int y)
-{
-	ft_putstr_fd(tgoto(CM, x, y + HEADER), 0);
-	g_sel.x = x;
-	g_sel.y = y;
-	g_sel.args->coord.x = x / g_sel.pad + 1;
-	g_sel.args->coord.y = y + 1;
-}

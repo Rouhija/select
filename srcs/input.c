@@ -3,41 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 12:56:18 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/08 13:36:20 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/08 20:12:12 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
-
-void			action_arrow(long key)
-{
-	int	steps;
-
-	steps = g_sel.rows ? step_count(key) : g_sel.rows + 1;
-	if (key == DOWN)
-		g_sel.active = g_sel.active->next;
-	else if (key == UP)
-		g_sel.active = g_sel.active->prev;
-	else if (key == RIGHT)
-	{
-		while (steps--)
-			g_sel.active = g_sel.active->next;
-	}
-	else if (key == LEFT)
-	{
-		while (steps--)
-			g_sel.active = g_sel.active->prev;
-	}
-}
-
-void			action_spc(void)
-{
-	g_sel.active->toggle = g_sel.active->toggle ? 0 : 1;
-	action_arrow(DOWN);
-}
 
 void			wait_for_input(void)
 {
@@ -55,8 +28,13 @@ void			wait_for_input(void)
 		else if (key == SPC)
 			action_spc();
 		else if (key == BKS || key == DEL)
-			delete_arg();
+		{
+			action_bks();
+			tputs(CL, 1, printnbr);
+		}
 		else if (key == UP || key == DOWN || key == RIGHT || key == LEFT)
 			action_arrow(key);
+		if (((key == BKS || key == DEL) && !g_sel.ac))
+			exit_program(NULL, 0, 1);
 	}
 }
