@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 23:17:05 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/09 15:46:27 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/09 16:10:10 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,35 @@
 
 static void		print_header(void)
 {
-	ft_putstr_fd(C_HDR, 2);
+	ft_putstr_fd(C_HDR, OUTPUT);
 	ft_putstr_fd(tgoto(CM, 0, 0), 0);
 	ft_putstr_fd("**** FT_SELECT ©srouhe ****", 2);
 	ft_putstr_fd(tgoto(CM, 0, 1), 0);
 	tputs(CE, 1, printnbr);
-	ft_putstr_fd(WHITE, 2);
-	ft_putstr_fd("relative path: ", 2);
-	ft_putstr_fd(g_sel.active->path, 2);
+	ft_putstr_fd(WHITE, OUTPUT);
+	ft_putstr_fd("relative path: ", OUTPUT);
+	ft_putstr_fd(g_sel.active->path, OUTPUT);
 	ft_putstr_fd(tgoto(CM, 0, 2), 0);
 	tputs(CE, 1, printnbr);
-	ft_putstr_fd("objects: ", 2);
-	ft_putstr_fd(ft_itoa_base(g_sel.ac, 10), 2);
-	ft_putstr_fd(" selected: ", 2);
-	ft_putstr_fd(ft_itoa_base(g_sel.selected, 10), 2);
-	ft_putstr_fd(NORMAL, 2);
+	ft_putstr_fd("objects: ", OUTPUT);
+	ft_putstr_fd(ft_itoa_base(g_sel.ac, 10), OUTPUT);
+	ft_putstr_fd(" selected: ", OUTPUT);
+	ft_putstr_fd(ft_itoa_base(g_sel.selected, 10), OUTPUT);
+	ft_putstr_fd(NORMAL, OUTPUT);
 }
 
 static void		print_out(void)
 {
 	if (g_sel.args == g_sel.active)
-		ft_putstr_fd(UNDERLINE, 2);
+		ft_putstr_fd(UNDERLINE, OUTPUT);
 	if (g_sel.args->toggle)
 	{
-		ft_putstr_fd(INVERSE_VIDEO, 2);
+		ft_putstr_fd(INVERSE_VIDEO, OUTPUT);
 		g_sel.selected++;
 	}
-	ft_putstr_fd(g_sel.args->color, 2);
-	ft_putstr_fd(g_sel.args->name, 2);
-	ft_putstr_fd(NORMAL, 2);
+	ft_putstr_fd(g_sel.args->color, OUTPUT);
+	ft_putstr_fd(g_sel.args->name, OUTPUT);
+	ft_putstr_fd(NORMAL, OUTPUT);
 }
 
 void			print_selection(void)

@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 12:02:09 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/09 15:37:36 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/09 16:11:14 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ char	*get_color(char *name)
 	lstat(name, &attr);
 	if (S_ISDIR(attr.st_mode))
 		return (ft_strdup(C_DIR));
-	else if (attr.st_mode & S_IXUSR || ft_strstr(name, ".a") ||
-			ft_strstr(name, "Makefile"))
+	else if (S_ISLNK(attr.st_mode))
+		return (ft_strdup(C_LNK));
+	else if (attr.st_mode & S_IXUSR)
 		return (ft_strdup(C_EXE));
 	else
 		return (ft_strdup(C_NO));
@@ -55,7 +56,7 @@ void	column_count(void)
 	struct winsize	w;
 
 	limit = COLUMN_W;
-	ioctl(1, TIOCGSIZE, &w);
+	ioctl(OUTPUT, TIOCGSIZE, &w);
 	while (g_sel.max_w >= limit)
 		limit += COLUMN_W;
 	g_sel.pad = limit;

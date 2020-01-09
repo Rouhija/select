@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 18:15:52 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/09 15:45:03 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/09 16:03:41 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # define BUF_SIZE 4096
 # define COLUMN_W 8
 # define HEADER 4
+# define OUTPUT 2
 # define JUMP 1
 
 # define INVERSE_VIDEO "\033[7m"
@@ -44,6 +45,7 @@
 # define C_OBJ "\033[22;37m"
 # define C_DIR "\033[22;34m"
 # define C_EXE "\033[22;31m"
+# define C_LNK "\033[22;36m"
 # define C_HDR "\033[01;34m"
 # define C_NO "\033[22;37m"
 
