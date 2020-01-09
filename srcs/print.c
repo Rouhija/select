@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 23:17:05 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/09 16:10:10 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/09 20:12:13 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,14 @@
 
 static void		print_header(void)
 {
+	char	*objs;
+	char	*sel;
+
+	objs = ft_itoa_base(g_sel.ac, 10);
+	sel = ft_itoa_base(g_sel.selected, 10);
 	ft_putstr_fd(C_HDR, OUTPUT);
 	ft_putstr_fd(tgoto(CM, 0, 0), 0);
-	ft_putstr_fd("**** FT_SELECT ©srouhe ****", 2);
+	ft_putstr_fd("**** FT_SELECT ©srouhe ****", OUTPUT);
 	ft_putstr_fd(tgoto(CM, 0, 1), 0);
 	tputs(CE, 1, printnbr);
 	ft_putstr_fd(WHITE, OUTPUT);
@@ -25,10 +30,12 @@ static void		print_header(void)
 	ft_putstr_fd(tgoto(CM, 0, 2), 0);
 	tputs(CE, 1, printnbr);
 	ft_putstr_fd("objects: ", OUTPUT);
-	ft_putstr_fd(ft_itoa_base(g_sel.ac, 10), OUTPUT);
+	ft_putstr_fd(objs, OUTPUT);
 	ft_putstr_fd(" selected: ", OUTPUT);
-	ft_putstr_fd(ft_itoa_base(g_sel.selected, 10), OUTPUT);
+	ft_putstr_fd(sel, OUTPUT);
 	ft_putstr_fd(NORMAL, OUTPUT);
+	free(objs);
+	free(sel);
 }
 
 static void		print_out(void)
@@ -74,16 +81,12 @@ void			print_args(void)
 	i = 0;
 	j = -1;
 	g_sel.selected = 0;
-	column_count();
 	g_sel.args = g_sel.head;
 	while (i < g_sel.ac)
 	{
 		cursor_move(g_sel.x, g_sel.y);
 		g_sel.y += 1;
 		print_out();
-		// ft_putstr_fd(ft_itoa_base(g_sel.args->coord.x, 10), 2);
-		// ft_putchar_fd(' ', 2);
-		// ft_putstr_fd(ft_itoa_base(g_sel.args->coord.y, 10), 2);
 		j++;
 		if (j == g_sel.rows)
 		{

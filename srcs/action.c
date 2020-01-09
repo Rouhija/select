@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 18:33:45 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/09 13:49:24 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/09 20:05:27 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,6 @@ void		cursor_move(int x, int y)
 	g_sel.y = y;
 	g_sel.args->coord.x = x / g_sel.pad + 1;
 	g_sel.args->coord.y = y + 1;
-}
-
-void		active_move(int x, int y, long key)
-{
-
-	g_sel.active->coord.x = x / g_sel.pad + 1;
-	g_sel.active->coord.y = y + 1;
 }
 
 void		action_bks(void)
@@ -44,58 +37,10 @@ void		action_bks(void)
 	prev->next = next;
 	next->prev = prev;
 	g_sel.ac--;
+	tputs(CL, 1, printnbr);
+	if (!g_sel.ac)
+		exit_program(NULL, 0, 1);
 }
-
-// void		action_arrow(long key)
-// {
-// 	int	i;
-// 	int	to_x;
-// 	int	to_y;
-
-// 	i = -1;
-// 	// ft_putstr_fd("                                                     ", 2);
-// 	// ft_putstr_fd(tgoto(CM, 0, HEADER), 0);
-// 	// ft_putstr_fd(ft_itoa_base(g_sel.active->coord.x, 10), 2);
-// 	// ft_putchar_fd(' ', 2);
-// 	// ft_putstr_fd(ft_itoa_base(g_sel.active->coord.y, 10), 2);
-// 	if (key == DOWN || key == UP)
-// 	{
-// 		key == DOWN ? g_sel.active = g_sel.active->next : PASS;
-// 		key == UP ? g_sel.active = g_sel.active->prev : PASS;
-// 		return ;
-// 	}
-// 	to_x = g_sel.active->coord.x;
-// 	to_y = g_sel.active->coord.y;
-// 	if (key == RIGHT)
-// 		to_x++;
-// 	else if (key == LEFT)
-// 		to_x--;
-// 	if (to_x == 0)
-// 	{
-// 		to_x = g_sel.cols;
-// 		to_y--;
-// 	}
-// 	else if (to_x > g_sel.cols)
-// 	{
-// 		to_x = 1;
-// 		to_y++;
-// 	}
-// 	if (to_x == 0 && to_y == 0)
-// 	{
-// 		to_x = g_sel.cols;
-// 		to_y = g_sel.rows - g_sel.lacking;
-// 	}
-// 	while (i++ < g_sel.ac)
-// 	{
-// 		g_sel.active = g_sel.active->next;
-// 		if (g_sel.active->coord.x == to_x && g_sel.active->coord.y == to_y)
-// 			break ;
-// 	}
-// 	// ft_putstr_fd("    ", 2);
-// 	// ft_putstr_fd(ft_itoa_base(to_x, 10), 2);
-// 	// ft_putchar_fd(' ', 2);
-// 	// ft_putstr_fd(ft_itoa_base(to_y, 10), 2);
-// }
 
 void		action_arrow(long key)
 {

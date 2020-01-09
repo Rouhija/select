@@ -6,11 +6,17 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 12:01:39 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/09 16:00:13 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/09 19:03:18 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
+
+/*
+** OPOST:	If this bit isn’t set, the characters are transmitted as-is.
+** ECHO:	Don't print out keypresses.
+** ICANON:	Input is processed in noncanonical mode.
+*/
 
 void	initial_config(void)
 {
@@ -30,7 +36,7 @@ void	initial_config(void)
 	tcgetattr(OUTPUT, &g_sel.attr);
 	tcgetattr(OUTPUT, &g_sel.def);
 	g_sel.attr.c_oflag &= ~OPOST;
-	g_sel.attr.c_lflag &= ~(ECHO | ECHONL | ICANON);
+	g_sel.attr.c_lflag &= ~(ECHO | ICANON);
 	g_sel.attr.c_cc[VMIN] = 0;
 	g_sel.attr.c_cc[VTIME] = 1;
 	tcsetattr(OUTPUT, TCSANOW, &g_sel.attr);

@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 18:15:52 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/09 16:03:41 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/09 19:49:29 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,11 @@
 
 # define BUF_SIZE 4096
 # define COLUMN_W 8
+# define RETRY 30
 # define HEADER 4
 # define OUTPUT 2
 # define JUMP 1
+# define CTRL_Z "\x1A"
 
 # define INVERSE_VIDEO "\033[7m"
 # define UNDERLINE "\033[4m"
@@ -128,7 +130,7 @@ int		printnbr(int nbr);
 int		step_count(long key);
 char	*get_color(char *name);
 
-void	column_count(void);
+void	column_count(int retry);
 void	initial_config(void);
 void	reset_config(void);
 void	exit_program(char *arg, int code, int flag);

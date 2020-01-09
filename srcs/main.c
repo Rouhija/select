@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 19:10:26 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/09 16:08:13 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/09 20:13:26 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int				main(int ac, char **av)
 		exit_program(NULL, 1, 0);
 	monitor_signals();
 	set_args(av);
-	// ft_printf("cols %d rows %d max_w %d ac %d pad %d active column %d lacking %d\n", g_sel.cols, g_sel.rows, g_sel.max_w, g_sel.ac, g_sel.pad, g_sel.lacking);
 	initial_config();
 	wait_for_input();
 	reset_config();

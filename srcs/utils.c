@@ -6,11 +6,16 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 12:02:09 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/09 16:11:14 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/09 20:02:34 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
+
+/*
+**	Horrible function to calculate the steps for moving in linked list.
+**	Logic for LEFT and RIGHT keys in case cursor is on the edge of the area.
+*/
 
 int		step_count(long key)
 {
@@ -22,13 +27,12 @@ int		step_count(long key)
 	else if (g_sel.active->coord.x == g_sel.cols - 1 && key == RIGHT &&
 			g_sel.active->coord.y + g_sel.lacking > g_sel.rows + 1)
 		steps += g_sel.rows + 1 - g_sel.lacking + JUMP;
-
-		
+	else if (g_sel.active->prev->coord.x == 1 && key == LEFT &&
+			g_sel.active->prev->coord.y + g_sel.lacking > g_sel.rows + 2)
+		steps += g_sel.rows + 1 - g_sel.lacking + JUMP;
 	else if (g_sel.active->coord.x == 1 && key == LEFT &&
 			g_sel.active->coord.y + g_sel.lacking > g_sel.rows + 2)
 		steps += g_sel.rows + 1 - g_sel.lacking + JUMP;
-
-
 	else if (g_sel.active->coord.x == 1 && key == LEFT)
 		steps -= g_sel.lacking - JUMP;
 	return (steps);
@@ -49,12 +53,18 @@ char	*get_color(char *name)
 		return (ft_strdup(C_NO));
 }
 
-void	column_count(void)
+/*
+**	Is screen is of insufficient size, waits resizing for 30 seconds.
+*/
+
+void	column_count(int retry)
 {
 	int				limit;
 	int				cols;
 	struct winsize	w;
 
+	if (!retry)
+		exit_program(NULL, 8, 1);
 	limit = COLUMN_W;
 	ioctl(OUTPUT, TIOCGSIZE, &w);
 	while (g_sel.max_w >= limit)
@@ -62,5 +72,16 @@ void	column_count(void)
 	g_sel.pad = limit;
 	g_sel.cols = w.ws_col / limit;
 	g_sel.rows = g_sel.ac > g_sel.cols ? g_sel.ac / g_sel.cols : 0;
+	if (g_sel.rows + HEADER > w.ws_row)
+	{
+		if (retry == RETRY)
+		{
+			tputs(CL, 1, printnbr);
+			ft_putstr_fd(tgoto(CM, 0, 0), 0);
+			ft_putstr_fd("\e[3mPlease resize screen.\e[0m", OUTPUT);
+		}
+		usleep(1000 * 1000);
+		column_count(retry - 1);
+	}
 	g_sel.lacking = (g_sel.cols * (g_sel.rows + 1)) % g_sel.ac;
 }
