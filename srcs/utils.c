@@ -6,21 +6,11 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 12:02:09 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/08 20:11:44 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/09 15:37:36 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
-
-void	termcap_cmd(char *cmd)
-{
-	char *cmd_s;
-
-	tputs(CL, 1, printnbr);
-	cmd_s = (tgetstr(cmd, NULL));
-	tputs(cmd_s, 1, printnbr);
-	free(cmd_s);
-}
 
 int		step_count(long key)
 {
@@ -29,11 +19,16 @@ int		step_count(long key)
 	steps = g_sel.rows + 1;
 	if (g_sel.active->coord.x == g_sel.cols && key == RIGHT)
 		steps -= g_sel.lacking - JUMP;
-	else if (g_sel.active->coord.x == g_sel.cols - 1 && key == RIGHT && g_sel.active->coord.y + g_sel.lacking > g_sel.rows + 1)
+	else if (g_sel.active->coord.x == g_sel.cols - 1 && key == RIGHT &&
+			g_sel.active->coord.y + g_sel.lacking > g_sel.rows + 1)
 		steps += g_sel.rows + 1 - g_sel.lacking + JUMP;
 
-	else if (g_sel.active->coord.x == 1 && key == LEFT && g_sel.active->coord.y + g_sel.lacking > g_sel.rows + 1)
+		
+	else if (g_sel.active->coord.x == 1 && key == LEFT &&
+			g_sel.active->coord.y + g_sel.lacking > g_sel.rows + 2)
 		steps += g_sel.rows + 1 - g_sel.lacking + JUMP;
+
+
 	else if (g_sel.active->coord.x == 1 && key == LEFT)
 		steps -= g_sel.lacking - JUMP;
 	return (steps);
@@ -41,12 +36,14 @@ int		step_count(long key)
 
 char	*get_color(char *name)
 {
-	if (ft_strstr(name, "Makefile"))
-		return (ft_strdup(C_MAKEFILE));
-	else if (ft_strstr(name, ".o"))
-		return (ft_strdup(C_OBJ));
-	else if (ft_strstr(name, ".a"))
-		return (ft_strdup(C_A));
+	struct stat		attr;
+
+	lstat(name, &attr);
+	if (S_ISDIR(attr.st_mode))
+		return (ft_strdup(C_DIR));
+	else if (attr.st_mode & S_IXUSR || ft_strstr(name, ".a") ||
+			ft_strstr(name, "Makefile"))
+		return (ft_strdup(C_EXE));
 	else
 		return (ft_strdup(C_NO));
 }
@@ -66,4 +63,3 @@ void	column_count(void)
 	g_sel.rows = g_sel.ac > g_sel.cols ? g_sel.ac / g_sel.cols : 0;
 	g_sel.lacking = (g_sel.cols * (g_sel.rows + 1)) % g_sel.ac;
 }
-

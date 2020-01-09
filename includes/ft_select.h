@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 18:15:52 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/08 21:33:07 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/09 15:45:03 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,25 @@
 
 # define BUF_SIZE 4096
 # define COLUMN_W 8
-# define HEADER 3
+# define HEADER 4
 # define JUMP 1
 
 # define INVERSE_VIDEO "\033[7m"
 # define UNDERLINE "\033[4m"
-# define C_MAKEFILE "\033[22;31m"
 # define C_OBJ "\033[22;37m"
-# define C_A "\033[22;34m"
+# define C_DIR "\033[22;34m"
+# define C_EXE "\033[22;31m"
+# define C_HDR "\033[01;34m"
 # define C_NO "\033[22;37m"
+
+# define EXIT_0 "ft_select: successful exit."
+# define EXIT_1 "usage: ./ft_select arg1 [arg2] ..."
+# define EXIT_2 "ft_select: terminal configuration not found."
+# define EXIT_3 "ft_select: malloc error."
+# define EXIT_4 "ft_select: incorrect environment."
+# define EXIT_5 "ft_select: termcaps database not found."
+# define EXIT_6 "ft_select: terminal not found in termcaps database."
+# define EXIT_7 "ft_select: TERM environment value not found."
 
 # define ESC 0x1B
 # define SPC 0x20
@@ -71,7 +81,7 @@
 
 # define CM (tgetstr("cm", NULL))
 # define CL (tgetstr("cl", NULL))
-# define CE (tgetstr("cl", NULL))
+# define CE (tgetstr("ce", NULL))
 # define VI (tgetstr("vi", NULL))
 # define VE (tgetstr("ve", NULL))
 # define TI (tgetstr("ti", NULL))
@@ -96,6 +106,7 @@ typedef struct		s_sel
 	t_arg			*head;
 	t_arg			*active;
 	int				ac;
+	int				selected;
 	int				max_w;
 	int				lacking;
 	int				pad;
@@ -113,18 +124,22 @@ t_sel				g_sel;
 
 int		printnbr(int nbr);
 int		step_count(long key);
-
 char	*get_color(char *name);
 
 void	column_count(void);
 void	initial_config(void);
 void	reset_config(void);
 void	exit_program(char *arg, int code, int flag);
+
+void	monitor_signals(void);
 void	signal_handler(int signo);
+
 void	wait_for_input(void);
+
 void	set_args(char **av);
 void	free_arg(t_arg **arg);
 void	free_memory(void);
+
 void	print_args(void);
 void	print_selection(void);
 
@@ -133,7 +148,5 @@ void	action_bks(void);
 void	action_spc(void);
 void	action_arrow(long key);
 void	action_all(long key);
-
-void	termcap_cmd(char *cmd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 18:23:56 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/08 20:23:07 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/09 15:06:44 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,10 @@ t_arg		*new_arg(char *name)
 	if (!(new = (t_arg *)ft_memalloc(sizeof(t_arg))))
 		exit_program(NULL, 3, 0);
 	new->toggle = 0;
-	new->name = ft_rfind(name, '/') ? ft_strdup(ft_rfind(name, '/') + 1) : ft_strdup(name);
-	new->path = ft_strdup(name);
+	new->name = ft_rfind(name, '/') ?
+				ft_strdup(ft_rfind(name, '/') + 1) : ft_strdup(name);
+	new->path = ft_rfind(name, '/') ?
+				ft_strdup(name) : ft_strjoin("./", name);
 	new->color = get_color(name);
 	new->next = NULL;
 	new->prev = NULL;
@@ -73,7 +75,7 @@ static void	insert_arg(char *name)
 	{
 		tmp = g_sel.args->prev;
 		new->next = g_sel.args;
-		g_sel.args->prev = new;	
+		g_sel.args->prev = new;
 		new->prev = tmp;
 		tmp->next = new;
 	}
@@ -82,7 +84,7 @@ static void	insert_arg(char *name)
 void		set_args(char **av)
 {
 	int		i;
-	
+
 	i = 0;
 	g_sel.x = 0;
 	g_sel.y = 0;
@@ -90,7 +92,8 @@ void		set_args(char **av)
 	g_sel.max_w = 0;
 	while (av[++i])
 	{
-		g_sel.max_w = ft_strlen(av[i]) > g_sel.max_w ? ft_strlen(av[i]) : g_sel.max_w;
+		g_sel.max_w = ft_strlen(av[i]) > g_sel.max_w ?
+					ft_strlen(av[i]) : g_sel.max_w;
 		insert_arg(av[i]);
 	}
 }
