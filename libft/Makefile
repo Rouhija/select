@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+         #
+#    By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/15 16:29:02 by srouhe            #+#    #+#              #
-#    Updated: 2020/01/08 12:54:10 by srouhe           ###   ########.fr        #
+#    Updated: 2020/01/10 20:55:05 by srouhe           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ FILES	=	ft_atoi.c ft_bzero.c ft_count_digits.c ft_count_leading.c ft_count_trail
 	    	ft_strtrim.c ft_tolower.c ft_toupper.c ft_print_bits.c ft_lstpushback.c ft_strchr_len.c \
 	    	ft_itoa_base.c ft_strrev.c ft_get_next_line.c ft_pow.c ft_putchar_w.c ft_putstr_w.c \
 	    	ft_strupper.c ft_lfind.c ft_pathjoin.c ft_realloc.c ft_freestrarr.c ft_putnstr.c \
-			ft_str_isempty.c ft_str_replace.c ft_rfind.c
+			ft_str_isempty.c ft_str_replace.c ft_rfind.c ft_endswith.c
 
 PTF		= 	colors.c \
 			format_args.c \

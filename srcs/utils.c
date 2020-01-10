@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 12:02:09 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/10 15:24:12 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/10 21:18:48 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,12 @@ char	*get_color(char *name)
 		return (ft_strdup(C_LNK));
 	else if (attr.st_mode & S_IXUSR)
 		return (ft_strdup(C_EXE));
+	else if (ft_endswith(name, ".h"))
+		return (ft_strdup(C_HDR));
+	else if (ft_endswith(name, ".o"))
+		return (ft_strdup(C_OBJ));
+	else if (ft_endswith(name, ".md") || ft_endswith(name, "Makefile"))
+		return (ft_strdup(C_OTH));
 	else
 		return (ft_strdup(C_NO));
 }
@@ -57,14 +63,12 @@ char	*get_color(char *name)
 **	Is screen is of insufficient size, waits resizing for 30 seconds.
 */
 
-void	column_count(int retry)
+int		column_count(void)
 {
 	int				limit;
 	int				cols;
 	struct winsize	w;
 
-	if (!retry)
-		exit_program(NULL, 8, 1);
 	limit = COLUMN_W;
 	ioctl(OUTPUT, TIOCGSIZE, &w);
 	while (g_sel.max_w >= limit)
@@ -72,16 +76,12 @@ void	column_count(int retry)
 	g_sel.pad = limit;
 	g_sel.cols = w.ws_col / limit;
 	g_sel.rows = g_sel.ac > g_sel.cols ? g_sel.ac / g_sel.cols : 0;
-	if (g_sel.rows + HEADER > w.ws_row)
+	if (g_sel.rows + HEADER + 2 > w.ws_row)
 	{
-		if (retry == RETRY)
-		{
-			tputs(CL, 1, printnbr);
-			ft_putstr_fd(tgoto(CM, 0, 0), 0);
-			ft_putstr_fd("\e[3mPlease resize screen.\e[0m", OUTPUT);
-		}
-		usleep(1000 * 1000);
-		column_count(retry - 1);
+		ft_putstr_fd(tgoto(CM, 0, 0), 0);
+		ft_putstr_fd("\e[3mPlease resize screen.\e[0m", OUTPUT);
+		return (0);
 	}
 	g_sel.lacking = (g_sel.cols * (g_sel.rows + 1)) % g_sel.ac;
+	return (1);
 }

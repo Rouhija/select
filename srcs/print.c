@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 23:17:05 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/09 20:12:13 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/10 21:19:40 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void		print_header(void)
 
 	objs = ft_itoa_base(g_sel.ac, 10);
 	sel = ft_itoa_base(g_sel.selected, 10);
-	ft_putstr_fd(C_HDR, OUTPUT);
+	ft_putstr_fd(HEADING, OUTPUT);
 	ft_putstr_fd(tgoto(CM, 0, 0), 0);
 	ft_putstr_fd("**** FT_SELECT ©srouhe ****", OUTPUT);
 	ft_putstr_fd(tgoto(CM, 0, 1), 0);
@@ -48,7 +48,10 @@ static void		print_out(void)
 		g_sel.selected++;
 	}
 	ft_putstr_fd(g_sel.args->color, OUTPUT);
-	ft_putstr_fd(g_sel.args->name, OUTPUT);
+	if (ft_endswith(g_sel.args->name, ".o") || ft_endswith(g_sel.args->name, ".c"))
+		ft_printf(OUTPUT, "\e[3m%s\e[0m", g_sel.args->name);
+	else
+		ft_putstr_fd(g_sel.args->name, OUTPUT);
 	ft_putstr_fd(NORMAL, OUTPUT);
 }
 
@@ -80,6 +83,8 @@ void			print_args(void)
 
 	i = 0;
 	j = -1;
+	if (!column_count())
+		return ;
 	g_sel.selected = 0;
 	g_sel.args = g_sel.head;
 	while (i < g_sel.ac)

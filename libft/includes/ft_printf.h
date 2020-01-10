@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 13:42:22 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/04 18:22:20 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/10 21:01:04 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@
 
 typedef struct	s_ptf
 {
+	int			fd;
 	int			buf_index;
 	int			width;
 	int			flags;

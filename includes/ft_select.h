@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 18:15:52 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/09 19:49:29 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/10 21:17:50 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,14 @@
 
 # define INVERSE_VIDEO "\033[7m"
 # define UNDERLINE "\033[4m"
-# define C_OBJ "\033[22;37m"
-# define C_DIR "\033[22;34m"
+# define C_OBJ "\033[01;30m"
+# define C_DIR "\033[01;32m"
+# define C_OTH "\033[22;34m"
 # define C_EXE "\033[22;31m"
 # define C_LNK "\033[22;36m"
-# define C_HDR "\033[01;34m"
+# define C_HDR "\033[22;35m"
 # define C_NO "\033[22;37m"
+# define HEADING "\033[01;34m"
 
 # define EXIT_0 "ft_select: successful exit."
 # define EXIT_1 "usage: ./ft_select arg1 [arg2] ..."
@@ -130,7 +132,7 @@ int		printnbr(int nbr);
 int		step_count(long key);
 char	*get_color(char *name);
 
-void	column_count(int retry);
+int		column_count(void);
 void	initial_config(void);
 void	reset_config(void);
 void	exit_program(char *arg, int code, int flag);

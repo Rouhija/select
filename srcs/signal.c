@@ -6,11 +6,32 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:11:21 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/09 19:09:21 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/10 20:21:58 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
+
+/*
+**	Signals:
+**		SIGINT:		^C
+**		SIGQUIT:	^\
+**		SIGTSTP:	^Z
+**		SIGSTOP:	^S
+**		SIGCONT:	^Q
+**		SIGWINCH:	Screen resizing
+*/
+
+void	monitor_signals(void)
+{
+	signal(SIGSTOP, signal_handler);
+	signal(SIGINT, signal_handler);
+	signal(SIGKILL, signal_handler);
+	signal(SIGQUIT, signal_handler);
+	signal(SIGTSTP, signal_handler);
+	signal(SIGCONT, signal_handler);
+	signal(SIGWINCH, signal_handler);
+}
 
 void	signal_handler(int signo)
 {
@@ -32,23 +53,9 @@ void	signal_handler(int signo)
 		reset_config();
 		exit_program(NULL, 0, 1);
 	}
-}
-
-/*
-**	Signals:
-**		SIGINT:		^C
-**		SIGQUIT:	^\
-**		SIGTSTP:	^Z
-**		SIGSTOP:	^S
-**		SIGCONT:	^Q
-*/
-
-void	monitor_signals(void)
-{
-	signal(SIGSTOP, signal_handler);
-	signal(SIGINT, signal_handler);
-	signal(SIGKILL, signal_handler);
-	signal(SIGQUIT, signal_handler);
-	signal(SIGTSTP, signal_handler);
-	signal(SIGCONT, signal_handler);
+	else if (signo = SIGWINCH)
+	{
+		tputs(CL, 1, printnbr);
+		print_args();
+	}
 }

@@ -6,18 +6,19 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 12:58:13 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/04 18:00:56 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/10 21:02:41 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static t_ptf		*initialize(char *format)
+static t_ptf		*initialize(int fd, char *format)
 {
 	t_ptf		*p;
 
 	if (!(p = ft_memalloc(sizeof(t_ptf))))
 		return (NULL);
+	p->fd = fd;
 	p->fmt = format;
 	p->fptr = format;
 	p->buf_index = 0;
@@ -36,7 +37,7 @@ static t_ptf		*initialize(char *format)
 
 void				flush_buffer(t_ptf **p)
 {
-	write(1, (*p)->buf, (*p)->buf_index);
+	write((*p)->fd, (*p)->buf, (*p)->buf_index);
 	ft_bzero((*p)->buf, BUF_SIZE);
 	(*p)->buf_index = 0;
 }
@@ -82,11 +83,11 @@ u_int64_t			exit_pft(t_ptf **p)
 	return (r);
 }
 
-int					ft_printf(const char *restrict format, ...)
+int					ft_printf(int fd, const char *restrict format, ...)
 {
 	t_ptf		*p;
 
-	if (!(p = initialize((char *)format)))
+	if (!(p = initialize(fd, (char *)format)))
 		return (-1);
 	va_start(p->ap, format);
 	while ((p->index = ft_lfind(p->fptr, '%')) != -1)
