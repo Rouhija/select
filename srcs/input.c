@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 12:56:18 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/09 20:04:39 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/10 15:29:49 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,16 @@
 void			wait_for_input(void)
 {
 	long		key;
+	ssize_t		r;
 
 	while (1)
 	{
 		key = 0;
-		tputs(CL, 1, printnbr);
+		// tputs(CL, 1, printnbr);
 		column_count(RETRY);
 		print_args();
-		read(2, &key, 8);
+		if ((r = read(2, &key, 8)) < 1)
+			continue ;
 		if (key == ESC)
 			exit_program(NULL, 0, 1);
 		else if (key == ENT)

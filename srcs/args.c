@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 18:23:56 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/09 15:06:44 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/10 14:57:56 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void		free_memory(void)
 		{
 			tmp = g_sel.active->next;
 			free_arg(&g_sel.active);
-			g_sel.active = tmp;
+			if (g_sel.ac)
+				g_sel.active = tmp;
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 18:33:45 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/09 20:05:27 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/10 15:04:40 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,16 @@ void		action_bks(void)
 	if (tmp == g_sel.head)
 		g_sel.head = next;
 	free_arg(&tmp);
-	g_sel.active = next;
-	prev->next = next;
-	next->prev = prev;
 	g_sel.ac--;
-	tputs(CL, 1, printnbr);
-	if (!g_sel.ac)
+	if (g_sel.ac)
+	{
+		g_sel.active = next;
+		prev->next = next;
+		next->prev = prev;
+	}
+	else
 		exit_program(NULL, 0, 1);
+	tputs(CL, 1, printnbr);
 }
 
 void		action_arrow(long key)
