@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 12:02:09 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/10 22:59:43 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/12 15:09:15 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ char	*get_color(char *name)
 }
 
 /*
-**	Is screen is of insufficient size, waits resizing for 30 seconds.
+**	Counts rows, columns and padding.
+**	Return -1 if screen size is insufficient for the number of arguments.
 */
 
 int		column_count(void)
 {
 	int				limit;
-	int				cols;
 	struct winsize	w;
 
 	limit = COLUMN_W;
@@ -84,4 +84,9 @@ int		column_count(void)
 	}
 	g_sel.lacking = (g_sel.cols * (g_sel.rows + 1)) % g_sel.ac;
 	return (1);
+}
+
+int		printnbr(int nbr)
+{
+	return (write(OUTPUT, &nbr, 1));
 }

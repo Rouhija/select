@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:11:21 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/10 23:08:12 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/12 14:39:58 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ void	signal_handler(int signo)
 		signo == SIGSTOP || signo == SIGQUIT || signo == SIGABRT)
 	{
 		reset_config();
-		exit_program(NULL, 0, 1);
+		exit_program(0, 1);
 	}
-	else if (signo = SIGWINCH)
+	else if (signo == SIGWINCH)
 	{
 		tputs(CL, 1, printnbr);
 		print_args();

@@ -6,20 +6,19 @@
 #    By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/15 16:29:02 by srouhe            #+#    #+#              #
-#    Updated: 2020/01/08 19:58:21 by srouhe           ###   ########.fr        #
+#    Updated: 2020/01/12 15:08:08 by srouhe           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 	= 	ft_select
 C		= 	gcc
-FLAGS 	= 	
+FLAGS 	= 	-Wall -Werror -Wextra
 
 FILES 	=	action.c \
 			args.c \
 			config.c \
 			input.c \
 			main.c \
-			misc.c \
 			print.c \
 			signal.c \
 			utils.c
@@ -43,4 +42,9 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+norm:
+	norminette srcs/*.c
+	norminette includes/*.h
+	make norm -C libft
+
+.PHONY: all clean fclean re norm

@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 12:01:39 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/10 15:27:07 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/12 14:39:43 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ void	initial_config(void)
 	char	buf[BUF_SIZE + 1];
 
 	if (!isatty(OUTPUT))
-		exit_program(NULL, 4, 0);
+		exit_program(4, 0);
 	if (!(term = getenv("TERM")))
-		exit_program(NULL, 7, 0);
+		exit_program(7, 0);
 	r = tgetent(buf, term);
 	if (r == -1)
-		exit_program(NULL, 5, 0);
+		exit_program(5, 0);
 	else if (r == 0)
-		exit_program(NULL, 6, 0);
+		exit_program(6, 0);
 	tcgetattr(OUTPUT, &g_sel.attr);
 	tcgetattr(OUTPUT, &g_sel.def);
 	g_sel.attr.c_oflag &= ~OPOST;

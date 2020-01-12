@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 18:23:56 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/10 14:57:56 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/12 14:39:18 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_arg		*new_arg(char *name)
 	t_arg	*new;
 
 	if (!(new = (t_arg *)ft_memalloc(sizeof(t_arg))))
-		exit_program(NULL, 3, 0);
+		exit_program(3, 0);
 	new->toggle = 0;
 	new->name = ft_rfind(name, '/') ?
 				ft_strdup(ft_rfind(name, '/') + 1) : ft_strdup(name);
@@ -93,8 +93,8 @@ void		set_args(char **av)
 	g_sel.max_w = 0;
 	while (av[++i])
 	{
-		g_sel.max_w = ft_strlen(av[i]) > g_sel.max_w ?
-					ft_strlen(av[i]) : g_sel.max_w;
+		g_sel.max_w = (int)ft_strlen(av[i]) > g_sel.max_w ?
+					(int)ft_strlen(av[i]) : g_sel.max_w;
 		insert_arg(av[i]);
 	}
 }

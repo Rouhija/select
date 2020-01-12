@@ -6,13 +6,13 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 19:10:26 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/09 20:13:26 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/12 14:38:57 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-void			exit_program(char *arg, int code, int flag)
+void			exit_program(int code, int flag)
 {
 	if (flag)
 	{
@@ -33,7 +33,7 @@ void			exit_program(char *arg, int code, int flag)
 int				main(int ac, char **av)
 {
 	if (ac < 2)
-		exit_program(NULL, 1, 0);
+		exit_program(1, 0);
 	monitor_signals();
 	set_args(av);
 	initial_config();

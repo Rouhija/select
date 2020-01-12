@@ -6,7 +6,7 @@
 #    By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/15 16:29:02 by srouhe            #+#    #+#              #
-#    Updated: 2020/01/10 20:55:05 by srouhe           ###   ########.fr        #
+#    Updated: 2020/01/12 15:05:52 by srouhe           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,10 +62,6 @@ norm:
 	norminette srcs/*.c
 	norminette includes/*.h
 	norminette ptf/*.c
-
-test: re
-	@/bin/rm -f a.out
-	@$(C) $(FLAGS) main.c -I $(HDRS) -L. -lft
 
 .PHONY: all
 .PHONY: clean

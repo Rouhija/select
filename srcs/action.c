@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 18:33:45 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/10 15:04:40 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/12 14:39:23 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void		action_bks(void)
 		next->prev = prev;
 	}
 	else
-		exit_program(NULL, 0, 1);
+		exit_program(0, 1);
 	tputs(CL, 1, printnbr);
 }
 

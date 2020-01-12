@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 18:15:52 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/10 21:17:50 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/12 15:07:13 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@
 
 # define BUF_SIZE 4096
 # define COLUMN_W 8
-# define RETRY 30
 # define HEADER 4
 # define OUTPUT 2
 # define JUMP 1
@@ -53,7 +52,7 @@
 # define C_NO "\033[22;37m"
 # define HEADING "\033[01;34m"
 
-# define EXIT_0 "ft_select: successful exit."
+# define EXIT_0 "ft_select: graceful exit."
 # define EXIT_1 "usage: ./ft_select arg1 [arg2] ..."
 # define EXIT_2 "ft_select: terminal configuration not found."
 # define EXIT_3 "ft_select: malloc error."
@@ -128,31 +127,31 @@ t_sel				g_sel;
 ** -------- FUNCTIONS --------
 */
 
-int		printnbr(int nbr);
-int		step_count(long key);
-char	*get_color(char *name);
+int					printnbr(int nbr);
+int					step_count(long key);
+char				*get_color(char *name);
 
-int		column_count(void);
-void	initial_config(void);
-void	reset_config(void);
-void	exit_program(char *arg, int code, int flag);
+int					column_count(void);
+void				initial_config(void);
+void				reset_config(void);
+void				exit_program(int code, int flag);
 
-void	monitor_signals(void);
-void	signal_handler(int signo);
+void				monitor_signals(void);
+void				signal_handler(int signo);
 
-void	wait_for_input(void);
+void				wait_for_input(void);
 
-void	set_args(char **av);
-void	free_arg(t_arg **arg);
-void	free_memory(void);
+void				set_args(char **av);
+void				free_arg(t_arg **arg);
+void				free_memory(void);
 
-void	print_args(void);
-void	print_selection(void);
+void				print_args(void);
+void				print_selection(void);
 
-void	cursor_move(int x, int y);
-void	action_bks(void);
-void	action_spc(void);
-void	action_arrow(long key);
-void	action_all(long key);
+void				cursor_move(int x, int y);
+void				action_bks(void);
+void				action_spc(void);
+void				action_arrow(long key);
+void				action_all(long key);
 
 #endif
