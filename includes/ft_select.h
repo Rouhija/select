@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 18:15:52 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/13 11:40:48 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/13 12:25:52 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,11 @@
 # define VE (tgetstr("ve", NULL))
 # define TI (tgetstr("ti", NULL))
 # define TE (tgetstr("te", NULL))
+
+# define US (tgetstr("us", NULL))
+# define UE (tgetstr("ue", NULL))
+# define SO (tgetstr("so", NULL))
+# define SE (tgetstr("se", NULL))
 
 typedef struct		s_arg
 {

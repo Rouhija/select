@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 23:17:05 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/12 14:37:02 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/13 12:27:02 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,21 @@ static void		print_header(void)
 static void		print_out(void)
 {
 	if (g_sel.args == g_sel.active)
-		ft_putstr_fd(UNDERLINE, OUTPUT);
+		tputs(US, 1, printnbr);
 	if (g_sel.args->toggle)
 	{
-		ft_putstr_fd(INVERSE_VIDEO, OUTPUT);
+		tputs(SO, 1, printnbr);
 		g_sel.selected++;
 	}
-	ft_putstr_fd(g_sel.args->color, OUTPUT);
-	if (ft_endswith(g_sel.args->name, ".o") ||
-		ft_endswith(g_sel.args->name, ".c"))
-		ft_printf(OUTPUT, "\e[3m%s\e[0m", g_sel.args->name);
-	else
-		ft_putstr_fd(g_sel.args->name, OUTPUT);
-	ft_putstr_fd(NORMAL, OUTPUT);
+	// ft_putstr_fd(g_sel.args->color, OUTPUT);
+	// if (ft_endswith(g_sel.args->name, ".o") ||
+	// 	ft_endswith(g_sel.args->name, ".c"))
+	// 	ft_printf(OUTPUT, "\e[3m%s\e[0m", g_sel.args->name);
+	// else
+	ft_putstr_fd(g_sel.args->name, OUTPUT);
+	// ft_putstr_fd(NORMAL, OUTPUT);
+	tputs(UE, 1, printnbr);
+	tputs(SE, 1, printnbr);
 }
 
 void			print_selection(void)
@@ -102,6 +104,6 @@ void			print_args(void)
 		}
 		g_sel.args = g_sel.args->next;
 	}
-	print_header();
+	// print_header();
 	cursor_move(0, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:11:21 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/13 11:40:52 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/13 12:06:40 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 **		SIGTSTP:	^Z
 **		SIGSTOP:	^S
 **		SIGCONT:	^Q
+**		SIGABRT:	-6
+**		SIGKILL:	-9 (cannot be intercepted)
 **		SIGWINCH:	Screen resizing
 */
 
