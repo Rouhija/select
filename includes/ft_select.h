@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 18:15:52 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/13 12:31:52 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/13 16:46:12 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ t_sel				g_sel;
 */
 
 int					printnbr(int nbr);
-int					step_count(long key);
+int					first_or_last_col(long key);
 int					column_count(void);
 char				*get_color(char *name);
 void				initial_config(void);

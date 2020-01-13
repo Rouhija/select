@@ -6,36 +6,24 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 12:02:09 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/13 12:42:38 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/13 16:47:08 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
 /*
-**	Horrible function to calculate the steps for moving in linked list.
 **	Logic for LEFT and RIGHT keys in case cursor is on the edge of the area.
 */
 
-int		step_count(long key)
+int		first_or_last_col(long key)
 {
-	int steps;
-
-	steps = g_sel.rows + 1;
-	if (g_sel.active->coord.x == g_sel.cols && key == RIGHT)
-		steps -= g_sel.lacking - JUMP;
-	else if (g_sel.active->coord.x == g_sel.cols - 1 && key == RIGHT &&
-			g_sel.active->coord.y + g_sel.lacking > g_sel.rows + 1)
-		steps += g_sel.rows + 1 - g_sel.lacking + JUMP;
-	else if (g_sel.active->prev->coord.x == 1 && key == LEFT &&
-			g_sel.active->prev->coord.y + g_sel.lacking > g_sel.rows + 2)
-		steps += g_sel.rows + 1 - g_sel.lacking + JUMP;
-	else if (g_sel.active->coord.x == 1 && key == LEFT &&
-			g_sel.active->coord.y + g_sel.lacking > g_sel.rows + 2)
-		steps += g_sel.rows + 1 - g_sel.lacking + JUMP;
-	else if (g_sel.active->coord.x == 1 && key == LEFT)
-		steps -= g_sel.lacking - JUMP;
-	return (steps);
+    if (g_sel.active->coord.x == g_sel.cols && key == RIGHT)
+        return (DOWN);
+    else if (g_sel.active->coord.x == 1 && key == LEFT)
+        return (UP);
+	else
+		return (0);
 }
 
 char	*get_color(char *name)

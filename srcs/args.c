@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 18:23:56 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/12 14:39:18 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/13 16:46:58 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ static void	insert_arg(char *name)
 		new->prev = new;
 		new->next = new;
 		g_sel.args = new;
-		g_sel.head = new;
-		g_sel.active = new;
+		g_sel.head = g_sel.args;
+		g_sel.active = g_sel.args;
 	}
 	else
 	{
