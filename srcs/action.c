@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 18:33:45 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/13 18:06:35 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/13 18:15:16 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void		action_spc(void)
 
 	tmp = *g_sel.active;
 	tmp->toggle = tmp->toggle ? 0 : 1;
-	g_sel.active = &tmp->next;
 }
 
 void		action_all(long key)

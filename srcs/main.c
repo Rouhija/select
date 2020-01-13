@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 19:10:26 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/13 18:00:39 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/13 18:14:12 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void			exit_program(int code, int flag)
 		reset_config();
 		free_memory();
 	}
-	code == 0 ? ft_putendl_fd(EXIT_0, 1) : PASS;
 	code == 1 ? ft_putendl_fd(EXIT_1, 1) : PASS;
 	code == 2 ? ft_putendl_fd(EXIT_2, 1) : PASS;
 	code == 3 ? ft_putendl_fd(EXIT_3, 1) : PASS;
