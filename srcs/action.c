@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 18:33:45 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/13 12:42:03 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/13 20:39:55 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void		cursor_move(int x, int y)
 	ft_putstr_fd(tgoto(CM, x, y + HEADER), 0);
 	g_sel.x = x;
 	g_sel.y = y;
-	g_sel.args->coord.x = x / g_sel.pad + 1;
-	g_sel.args->coord.y = y + 1;
 }
 
 void		action_bks(void)
@@ -47,29 +45,17 @@ void		action_bks(void)
 
 void		action_arrow(long key)
 {
-	int	steps;
-
-	steps = g_sel.rows ? step_count(key) : g_sel.rows + 1;
 	if (key == DOWN)
 		g_sel.active = g_sel.active->next;
 	else if (key == UP)
 		g_sel.active = g_sel.active->prev;
-	else if (key == RIGHT)
-	{
-		while (steps--)
-			g_sel.active = g_sel.active->next;
-	}
-	else if (key == LEFT)
-	{
-		while (steps--)
-			g_sel.active = g_sel.active->prev;
-	}
+	else
+		jump_columns(key);
 }
 
 void		action_spc(void)
 {
 	g_sel.active->toggle = g_sel.active->toggle ? 0 : 1;
-	action_arrow(RIGHT);
 }
 
 void		action_all(long key)

@@ -6,36 +6,44 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 12:02:09 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/13 12:42:38 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/13 20:42:00 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
+int		printnbr(int nbr)
+{
+	return (write(OUTPUT, &nbr, 1));
+}
+
 /*
-**	Horrible function to calculate the steps for moving in linked list.
-**	Logic for LEFT and RIGHT keys in case cursor is on the edge of the area.
+**	Utility function for LEFT and RIGHT keypresses.
 */
 
-int		step_count(long key)
+void	jump_columns(long key)
 {
-	int steps;
+	int		steps;
 
 	steps = g_sel.rows + 1;
-	if (g_sel.active->coord.x == g_sel.cols && key == RIGHT)
-		steps -= g_sel.lacking - JUMP;
-	else if (g_sel.active->coord.x == g_sel.cols - 1 && key == RIGHT &&
-			g_sel.active->coord.y + g_sel.lacking > g_sel.rows + 1)
-		steps += g_sel.rows + 1 - g_sel.lacking + JUMP;
-	else if (g_sel.active->prev->coord.x == 1 && key == LEFT &&
-			g_sel.active->prev->coord.y + g_sel.lacking > g_sel.rows + 2)
-		steps += g_sel.rows + 1 - g_sel.lacking + JUMP;
-	else if (g_sel.active->coord.x == 1 && key == LEFT &&
-			g_sel.active->coord.y + g_sel.lacking > g_sel.rows + 2)
-		steps += g_sel.rows + 1 - g_sel.lacking + JUMP;
-	else if (g_sel.active->coord.x == 1 && key == LEFT)
-		steps -= g_sel.lacking - JUMP;
-	return (steps);
+	if (key == RIGHT)
+	{
+		while (steps--)
+		{
+			g_sel.active = g_sel.active->next;
+			if (g_sel.active == g_sel.head || g_sel.active == g_sel.head->prev)
+				break ;
+		}
+	}
+	else if (key == LEFT)
+	{
+		while (steps--)
+		{
+			g_sel.active = g_sel.active->prev;
+			if (g_sel.active == g_sel.head || g_sel.active == g_sel.head->prev)
+				break ;
+		}
+	}
 }
 
 char	*get_color(char *name)
@@ -76,17 +84,11 @@ int		column_count(void)
 	g_sel.pad = limit;
 	g_sel.cols = w.ws_col / limit;
 	g_sel.rows = g_sel.ac > g_sel.cols ? g_sel.ac / g_sel.cols : 0;
-	if (g_sel.rows + HEADER + 3 > w.ws_row)
+	if (g_sel.rows + HEADER + 4 > w.ws_row)
 	{
 		ft_putstr_fd(tgoto(CM, 0, 0), 0);
 		ft_putstr_fd("\e[3mPlease resize screen.\e[0m", OUTPUT);
 		return (0);
 	}
-	g_sel.lacking = (g_sel.cols * (g_sel.rows + 1)) % g_sel.ac;
 	return (1);
-}
-
-int		printnbr(int nbr)
-{
-	return (write(OUTPUT, &nbr, 1));
 }

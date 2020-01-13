@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 23:17:05 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/13 12:30:10 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/13 20:41:34 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void			print_args(void)
 	if (!column_count())
 		return ;
 	g_sel.selected = 0;
-	g_sel.args = g_sel.head;
 	while (++i < g_sel.ac)
 	{
 		cursor_move(g_sel.x, g_sel.y);
