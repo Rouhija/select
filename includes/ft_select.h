@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 18:15:52 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/13 12:25:52 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/13 12:31:52 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,6 @@
 # define TI (tgetstr("ti", NULL))
 # define TE (tgetstr("te", NULL))
 
-# define US (tgetstr("us", NULL))
-# define UE (tgetstr("ue", NULL))
-# define SO (tgetstr("so", NULL))
-# define SE (tgetstr("se", NULL))
-
 typedef struct		s_arg
 {
 	int				toggle;
@@ -134,25 +129,19 @@ t_sel				g_sel;
 
 int					printnbr(int nbr);
 int					step_count(long key);
-char				*get_color(char *name);
-
 int					column_count(void);
+char				*get_color(char *name);
 void				initial_config(void);
 void				reset_config(void);
 void				exit_program(int code, int flag);
-
 void				monitor_signals(void);
 void				signal_handler(int signo);
-
 void				wait_for_input(void);
-
 void				set_args(char **av);
 void				free_arg(t_arg **arg);
 void				free_memory(void);
-
 void				print_args(void);
 void				print_selection(void);
-
 void				cursor_move(int x, int y);
 void				action_bks(void);
 void				action_spc(void);
