@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 18:33:45 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/13 19:19:08 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/13 20:24:36 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,22 @@ void		cursor_move(int x, int y)
 
 void		action_bks(void)
 {
-	t_arg	*prev;
-	t_arg	*next;
 	t_arg	*tmp;
 
-	prev = (*g_sel.active)->prev;
-	next = (*g_sel.active)->next;
+	if (!g_sel.active)
+		return ;
 	tmp = *g_sel.active;
 	if (tmp == g_sel.head)
-		g_sel.head = next;
-	free_arg(g_sel.active);
+		g_sel.head = tmp->next;
 	g_sel.ac--;
 	if (g_sel.ac)
 	{
 		g_sel.active = &tmp->next;
-		prev->next = next;
-		next->prev = prev;
+		tmp->prev->next = tmp->next;
+		tmp->next->prev = tmp->prev;
 	}
-	else
+	free_arg(&tmp);
+	if (!g_sel.ac)
 		exit_program(0, 1);
 	tputs(CL, 1, printnbr);
 }

@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 18:23:56 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/13 17:45:14 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/13 20:25:50 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void		free_arg(t_arg **arg)
 {
 	if (arg && *arg)
 	{
-		free((*arg)->name);
-		free((*arg)->path);
-		free((*arg)->color);
-		free(*arg);
-		(*arg) = NULL;
+		// free((*arg)->name);
+		// free((*arg)->path);
+		// free((*arg)->color);
+		// free(*arg);
+		// (*arg) = NULL;
 	}
 }
 
@@ -28,14 +28,14 @@ void		free_memory(void)
 {
 	t_arg	*tmp;
 
-	if (g_sel.active && g_sel.ac)
+	if (*g_sel.active && g_sel.ac)
 	{
-		while (g_sel.active && g_sel.ac--)
+		while (*g_sel.active && g_sel.ac--)
 		{
-			tmp = (*g_sel.active)->next;
-			free_arg(g_sel.active);
-			if (g_sel.ac)
-				*g_sel.active = tmp;
+			tmp = *g_sel.active;
+			// free_arg(g_sel.active);
+			if (g_sel.ac && tmp->next)
+				g_sel.active = &tmp->next;
 		}
 	}
 }
