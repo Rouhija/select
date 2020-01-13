@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 18:15:52 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/13 17:50:54 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/13 19:29:15 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@
 # define COLUMN_W 8
 # define HEADER 4
 # define OUTPUT 2
-# define JUMP 1
 # define M_EOF "\x1A"
 
 # define INVERSE_VIDEO "\033[7m"

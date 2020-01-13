@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 18:33:45 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/13 18:15:16 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/13 19:19:08 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,8 @@ void		action_bks(void)
 
 void		action_arrow(long key)
 {
-	int		steps;
 	t_arg	*tmp;
 
-	steps = g_sel.rows + 1;
 	tmp = *g_sel.active;
 	if (key == DOWN)
 		g_sel.active = &tmp->next;
