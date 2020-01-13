@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 15:11:21 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/12 14:39:58 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/13 11:40:52 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	signal_handler(int signo)
 	{
 		reset_config();
 		signal(SIGTSTP, SIG_DFL);
-		ioctl(OUTPUT, TIOCSTI, CTRL_Z);
+		ioctl(OUTPUT, TIOCSTI, M_EOF);
 	}
 	else if (signo == SIGCONT)
 	{

@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 18:15:52 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/12 15:07:13 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/13 11:40:48 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # define HEADER 4
 # define OUTPUT 2
 # define JUMP 1
-# define CTRL_Z "\x1A"
+# define M_EOF "\x1A"
 
 # define INVERSE_VIDEO "\033[7m"
 # define UNDERLINE "\033[4m"
