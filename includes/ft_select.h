@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 18:15:52 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/13 16:46:12 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/13 17:50:54 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ typedef struct		s_arg
 	char			*name;
 	char			*path;
 	char			*color;
-	struct s_point	coord;
 	struct s_arg	*next;
 	struct s_arg	*prev;
 }					t_arg;
@@ -109,11 +108,10 @@ typedef struct		s_sel
 	struct termios	def;
 	t_arg			*args;
 	t_arg			*head;
-	t_arg			*active;
+	t_arg			**active;
 	int				ac;
 	int				selected;
 	int				max_w;
-	int				lacking;
 	int				pad;
 	int				x;
 	int				y;
@@ -140,12 +138,13 @@ void				wait_for_input(void);
 void				set_args(char **av);
 void				free_arg(t_arg **arg);
 void				free_memory(void);
-void				print_args(void);
+void				print_args(t_arg *args);
 void				print_selection(void);
 void				cursor_move(int x, int y);
 void				action_bks(void);
 void				action_spc(void);
 void				action_arrow(long key);
 void				action_all(long key);
+void				jump_columns(long key);
 
 #endif

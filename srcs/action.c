@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 18:33:45 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/13 16:39:09 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/13 18:06:35 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void		cursor_move(int x, int y)
 	ft_putstr_fd(tgoto(CM, x, y + HEADER), 0);
 	g_sel.x = x;
 	g_sel.y = y;
-	g_sel.args->coord.x = x / g_sel.pad + 1;
-	g_sel.args->coord.y = y + 1;
 }
 
 void		action_bks(void)
@@ -27,16 +25,16 @@ void		action_bks(void)
 	t_arg	*next;
 	t_arg	*tmp;
 
-	prev = g_sel.active->prev;
-	next = g_sel.active->next;
-	tmp = g_sel.active;
+	prev = (*g_sel.active)->prev;
+	next = (*g_sel.active)->next;
+	tmp = *g_sel.active;
 	if (tmp == g_sel.head)
 		g_sel.head = next;
-	free_arg(&tmp);
+	free_arg(g_sel.active);
 	g_sel.ac--;
 	if (g_sel.ac)
 	{
-		g_sel.active = next;
+		g_sel.active = &tmp->next;
 		prev->next = next;
 		next->prev = prev;
 	}
@@ -47,42 +45,42 @@ void		action_bks(void)
 
 void		action_arrow(long key)
 {
-	int	steps;
+	int		steps;
+	t_arg	*tmp;
 
 	steps = g_sel.rows + 1;
-	if (key == DOWN || first_or_last_col(key) == DOWN)
-		g_sel.active = g_sel.active->next;
-	else if (key == UP || first_or_last_col(key) == UP)
-		g_sel.active = g_sel.active->prev;
-	else if (key == RIGHT)
-	{
-		while (steps--)
-			g_sel.active = g_sel.active->next;
-	}
-	else if (key == LEFT)
-	{
-		while (steps--)
-			g_sel.active = g_sel.active->prev;
-	}
+	tmp = *g_sel.active;
+	if (key == DOWN)
+		g_sel.active = &tmp->next;
+	else if (key == UP)
+		g_sel.active = &tmp->prev;
+	else
+		jump_columns(key);
 }
 
 void		action_spc(void)
 {
-	g_sel.active->toggle = g_sel.active->toggle ? 0 : 1;
-	action_arrow(DOWN);
+	t_arg	*tmp;
+
+	tmp = *g_sel.active;
+	tmp->toggle = tmp->toggle ? 0 : 1;
+	g_sel.active = &tmp->next;
 }
 
 void		action_all(long key)
 {
-	int	i;
-	int	toggle;
+	int		i;
+	int		toggle;
+	t_arg	*tmp;
 
 	i = 0;
+	tmp = *g_sel.active;
 	toggle = key == A_UP ? 1 : 0;
 	while (i < g_sel.ac)
 	{
-		g_sel.active->toggle = toggle;
-		g_sel.active = g_sel.active->next;
+		tmp->toggle = toggle;
+		g_sel.active = &tmp->next;
+		tmp = tmp->next;
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 23:17:05 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/13 16:46:14 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/13 17:44:28 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void		print_header(void)
 	tputs(CE, 1, printnbr);
 	ft_putstr_fd(WHITE, OUTPUT);
 	ft_putstr_fd("relative path: ", OUTPUT);
-	ft_putstr_fd(g_sel.active->path, OUTPUT);
+	ft_putstr_fd((*g_sel.active)->path, OUTPUT);
 	ft_putstr_fd(tgoto(CM, 0, 2), 0);
 	tputs(CE, 1, printnbr);
 	ft_putstr_fd("objects: ", OUTPUT);
@@ -38,21 +38,21 @@ static void		print_header(void)
 	free(sel);
 }
 
-static void		print_out(void)
+static void		print_out(t_arg *args)
 {
-	if (g_sel.args == g_sel.active)
+	if (args == *g_sel.active)
 		ft_putstr_fd(UNDERLINE, OUTPUT);
-	if (g_sel.args->toggle)
+	if (args->toggle)
 	{
 		ft_putstr_fd(INVERSE_VIDEO, OUTPUT);
 		g_sel.selected++;
 	}
-	ft_putstr_fd(g_sel.args->color, OUTPUT);
-	if (ft_endswith(g_sel.args->name, ".o") ||
-		ft_endswith(g_sel.args->name, ".c"))
-		ft_printf(OUTPUT, "\e[3m%s\e[0m", g_sel.args->name);
+	ft_putstr_fd(args->color, OUTPUT);
+	if (ft_endswith(args->name, ".o") ||
+		ft_endswith(args->name, ".c"))
+		ft_printf(OUTPUT, "\e[3m%s\e[0m", args->name);
 	else
-		ft_putstr_fd(g_sel.args->name, OUTPUT);
+		ft_putstr_fd(args->name, OUTPUT);
 	ft_putstr_fd(NORMAL, OUTPUT);
 }
 
@@ -77,7 +77,7 @@ void			print_selection(void)
 	flag ? ft_putchar_fd('\n', 1) : PASS;
 }
 
-void			print_args(void)
+void			print_args(t_arg *args)
 {
 	int		i;
 	int		j;
@@ -87,12 +87,11 @@ void			print_args(void)
 	if (!column_count())
 		return ;
 	g_sel.selected = 0;
-	g_sel.args = g_sel.head;
 	while (++i < g_sel.ac)
 	{
 		cursor_move(g_sel.x, g_sel.y);
 		g_sel.y += 1;
-		print_out();
+		print_out(args);
 		j++;
 		if (j == g_sel.rows)
 		{
@@ -100,7 +99,7 @@ void			print_args(void)
 			g_sel.x += g_sel.pad;
 			cursor_move(g_sel.x, 0);
 		}
-		g_sel.args = g_sel.args->next;
+		args = args->next;
 	}
 	print_header();
 	cursor_move(0, 0);

@@ -6,24 +6,15 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 12:02:09 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/13 16:47:08 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/13 17:50:26 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-/*
-**	Logic for LEFT and RIGHT keys in case cursor is on the edge of the area.
-*/
-
-int		first_or_last_col(long key)
+int		printnbr(int nbr)
 {
-    if (g_sel.active->coord.x == g_sel.cols && key == RIGHT)
-        return (DOWN);
-    else if (g_sel.active->coord.x == 1 && key == LEFT)
-        return (UP);
-	else
-		return (0);
+	return (write(OUTPUT, &nbr, 1));
 }
 
 char	*get_color(char *name)
@@ -70,11 +61,38 @@ int		column_count(void)
 		ft_putstr_fd("\e[3mPlease resize screen.\e[0m", OUTPUT);
 		return (0);
 	}
-	g_sel.lacking = (g_sel.cols * (g_sel.rows + 1)) % g_sel.ac;
 	return (1);
 }
 
-int		printnbr(int nbr)
+/*
+**	Utility function for LEFT and RIGHT keypresses.
+*/
+
+void	jump_columns(long key)
 {
-	return (write(OUTPUT, &nbr, 1));
+	int		steps;
+	t_arg	*tmp;
+
+	steps = g_sel.rows + 1;
+	tmp = *g_sel.active;
+	if (key == RIGHT)
+	{
+		while (steps--)
+		{
+			g_sel.active = &tmp->next;
+			tmp = tmp->next;
+			if (tmp == g_sel.head)
+				break ;
+		}
+	}
+	else if (key == LEFT)
+	{
+		while (steps--)
+		{
+			g_sel.active = &tmp->prev;
+			tmp = tmp->prev;
+			if (tmp == g_sel.head->prev)
+				break ;
+		}
+	}
 }
