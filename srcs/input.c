@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 12:56:18 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/13 17:46:46 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/13 20:41:23 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void			wait_for_input(void)
 	{
 		key = 0;
 		g_sel.args = g_sel.head;
-		print_args(g_sel.args);
+		print_args();
 		if ((r = read(2, &key, 8)) < 1)
 			continue ;
 		if (key == ESC)

@@ -6,41 +6,41 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 18:23:56 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/13 20:25:50 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/14 17:23:07 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-void		free_arg(t_arg **arg)
+void			free_arg(t_arg **arg)
 {
 	if (arg && *arg)
 	{
-		// free((*arg)->name);
-		// free((*arg)->path);
-		// free((*arg)->color);
-		// free(*arg);
-		// (*arg) = NULL;
+		free((*arg)->name);
+		free((*arg)->path);
+		free((*arg)->color);
+		free(*arg);
+		(*arg) = NULL;
 	}
 }
 
-void		free_memory(void)
+void			free_memory(void)
 {
 	t_arg	*tmp;
 
-	if (*g_sel.active && g_sel.ac)
+	if (g_sel.active && g_sel.ac)
 	{
-		while (*g_sel.active && g_sel.ac--)
+		while (g_sel.active && g_sel.ac--)
 		{
-			tmp = *g_sel.active;
-			// free_arg(g_sel.active);
-			if (g_sel.ac && tmp->next)
-				g_sel.active = &tmp->next;
+			tmp = g_sel.active->next;
+			free_arg(&g_sel.active);
+			if (g_sel.ac)
+				g_sel.active = tmp;
 		}
 	}
 }
 
-t_arg		*new_arg(char *name)
+static t_arg	*new_arg(char *name)
 {
 	t_arg	*new;
 
@@ -57,7 +57,7 @@ t_arg		*new_arg(char *name)
 	return (new);
 }
 
-static void	insert_arg(char *name)
+static void		insert_arg(char *name)
 {
 	t_arg	*new;
 	t_arg	*tmp;
@@ -69,8 +69,8 @@ static void	insert_arg(char *name)
 		new->prev = new;
 		new->next = new;
 		g_sel.args = new;
-		g_sel.head = g_sel.args;
-		g_sel.active = &g_sel.args;
+		g_sel.head = new;
+		g_sel.active = new;
 	}
 	else
 	{
@@ -82,7 +82,7 @@ static void	insert_arg(char *name)
 	}
 }
 
-void		set_args(char **av)
+void			set_args(char **av)
 {
 	int		i;
 

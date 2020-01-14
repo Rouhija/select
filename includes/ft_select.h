@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 18:15:52 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/13 19:29:15 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/13 20:34:07 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ typedef struct		s_sel
 	struct termios	def;
 	t_arg			*args;
 	t_arg			*head;
-	t_arg			**active;
+	t_arg			*active;
 	int				ac;
 	int				selected;
 	int				max_w;
@@ -125,7 +125,6 @@ t_sel				g_sel;
 */
 
 int					printnbr(int nbr);
-int					first_or_last_col(long key);
 int					column_count(void);
 char				*get_color(char *name);
 void				initial_config(void);
@@ -137,13 +136,13 @@ void				wait_for_input(void);
 void				set_args(char **av);
 void				free_arg(t_arg **arg);
 void				free_memory(void);
-void				print_args(t_arg *args);
+void				print_args(void);
 void				print_selection(void);
+void				jump_columns(long key);
 void				cursor_move(int x, int y);
 void				action_bks(void);
 void				action_spc(void);
 void				action_arrow(long key);
 void				action_all(long key);
-void				jump_columns(long key);
 
 #endif

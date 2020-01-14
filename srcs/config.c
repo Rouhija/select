@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 12:01:39 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/13 11:32:38 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/14 16:55:43 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	initial_config(void)
 	g_sel.attr.c_cc[VMIN] = 0;
 	g_sel.attr.c_cc[VTIME] = 1;
 	tcsetattr(OUTPUT, TCSANOW, &g_sel.attr);
-	tputs(CL, 1, printnbr);
 	tputs(TI, 1, printnbr);
 	tputs(VI, 1, printnbr);
 }

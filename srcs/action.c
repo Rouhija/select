@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 18:33:45 by srouhe            #+#    #+#             */
-/*   Updated: 2020/01/13 20:24:36 by srouhe           ###   ########.fr       */
+/*   Updated: 2020/01/14 17:01:57 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,61 +21,55 @@ void		cursor_move(int x, int y)
 
 void		action_bks(void)
 {
+	t_arg	*prev;
+	t_arg	*next;
 	t_arg	*tmp;
 
-	if (!g_sel.active)
-		return ;
-	tmp = *g_sel.active;
+	prev = g_sel.active->prev;
+	next = g_sel.active->next;
+	tmp = g_sel.active;
 	if (tmp == g_sel.head)
-		g_sel.head = tmp->next;
+		g_sel.head = next;
+	free_arg(&tmp);
 	g_sel.ac--;
 	if (g_sel.ac)
 	{
-		g_sel.active = &tmp->next;
-		tmp->prev->next = tmp->next;
-		tmp->next->prev = tmp->prev;
+		g_sel.active = next;
+		prev->next = next;
+		next->prev = prev;
 	}
-	free_arg(&tmp);
-	if (!g_sel.ac)
+	else
 		exit_program(0, 1);
 	tputs(CL, 1, printnbr);
 }
 
 void		action_arrow(long key)
 {
-	t_arg	*tmp;
-
-	tmp = *g_sel.active;
 	if (key == DOWN)
-		g_sel.active = &tmp->next;
+		g_sel.active = g_sel.active->next;
 	else if (key == UP)
-		g_sel.active = &tmp->prev;
+		g_sel.active = g_sel.active->prev;
 	else
 		jump_columns(key);
 }
 
 void		action_spc(void)
 {
-	t_arg	*tmp;
-
-	tmp = *g_sel.active;
-	tmp->toggle = tmp->toggle ? 0 : 1;
+	g_sel.active->toggle = g_sel.active->toggle ? 0 : 1;
+	g_sel.active = g_sel.active->next;
 }
 
 void		action_all(long key)
 {
-	int		i;
-	int		toggle;
-	t_arg	*tmp;
+	int	i;
+	int	toggle;
 
 	i = 0;
-	tmp = *g_sel.active;
 	toggle = key == A_UP ? 1 : 0;
 	while (i < g_sel.ac)
 	{
-		tmp->toggle = toggle;
-		g_sel.active = &tmp->next;
-		tmp = tmp->next;
+		g_sel.active->toggle = toggle;
+		g_sel.active = g_sel.active->next;
 		i++;
 	}
 }
