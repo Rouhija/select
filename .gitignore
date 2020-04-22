@@ -3,6 +3,5 @@
 *.o
 a.out
 .vscode
-ft_select
-testdir
+select
 libft/libft.a

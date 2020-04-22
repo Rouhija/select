@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_select.h"
+#include "select.h"
 
 /*
 ** OPOST:	If this bit isn’t set, the characters are transmitted as-is.

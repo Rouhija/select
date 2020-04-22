@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME 	= 	ft_select
+NAME 	= 	select
 C		= 	gcc
 FLAGS 	= 	-Wall -Werror -Wextra
 

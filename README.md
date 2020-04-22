@@ -1,18 +1,20 @@
 ### Description
 Command line file browser/manager. Browse files in a simple UI with arrows and return selection back to shell.
 
-### Usage
+## Usage
 ```sh
-./ft_select arg1 [arg2] ...
+make && ./select arg1 [arg2] ...
 ```
 
-### Commands
-- ENTER: return selection
-- SPACE: select/unselect object
-- BACKSPACE/DEL: remove object from list
-- SHIFT+a: select all
-- SHIFT+z: unselect all
-- ESC: exit
+## Commands
+| KEY | ACTION |
+|---------|---------|
+| <kbd>ENTER</kbd> | Return selection |
+| <kbd>SPACE</kbd> | Select/unselect object |
+| <kbd>BACKSPACE/DEL</kbd> | Remove object from list |
+| <kbd>SHIFT + A</kbd> | Select all |
+| <kbd>SHIFT + Z</kbd> | De-select all |
+| <kbd>ESC</kbd> | Exit |
 
 ### Dependencies
 Termcaps lib

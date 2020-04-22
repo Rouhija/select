@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_select.h"
+#include "select.h"
 
 void			free_arg(t_arg **arg)
 {
@@ -52,6 +52,7 @@ static t_arg	*new_arg(char *name)
 	new->path = ft_rfind(name, '/') ?
 				ft_strdup(name) : ft_strjoin("./", name);
 	new->color = get_color(name);
+	// new->color = NULL;
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);

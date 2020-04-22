@@ -36,7 +36,7 @@
 
 # define BUF_SIZE 4096
 # define COLUMN_W 8
-# define HEADER 4
+# define HEADER 5
 # define OUTPUT 2
 # define M_EOF "\x1A"
 

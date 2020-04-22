@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_select.h"
+#include "select.h"
 
 void		cursor_move(int x, int y)
 {

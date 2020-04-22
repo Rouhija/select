@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_select.h"
+#include "select.h"
 
 void			exit_program(int code, int flag)
 {
